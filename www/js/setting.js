@@ -1,7 +1,7 @@
 var db;
-var shortName = "rapidFire";
+var shortName = "rapidFirethree";
 var version = "1.6";
-var displayName = "rapidFire";
+var displayName = "rapidFirethree";
 var maxSize = 10 * 1024;
 
 var Create_Tables_Query = new Array();
@@ -146,7 +146,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
         {
             console.log("Database open..");
             $scope.CreateTables(0);
-            $scope.DownloadDataBase();
+           
             //            $scope.appInit();
             //  console.log("created");
         } else
@@ -181,6 +181,11 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
                                 console.log("Error occurred while creating the table." + error.message);
                             });
                 });
+            }
+            
+            if(i== Create_Tables_Query.length)
+            {
+                 $scope.DownloadDataBase();
             }
 
 
@@ -398,7 +403,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
 
 
     $scope.appInit = function () {
-
+        console.log("app initialted");
         $scope.getBasicSetting();
         $scope.getMainCategory();
         $scope.DailySongs();
