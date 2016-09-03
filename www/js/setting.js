@@ -1,13 +1,13 @@
 var db;
-var shortName = "latestdb";
+var shortName = "rapidFire";
 var version = "1.6";
-var displayName = "latestdb";
+var displayName = "rapidFire";
 var maxSize = 10 * 1024;
 
 var Create_Tables_Query = new Array();
 Create_Tables_Query[0] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_basic_settings" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "app_title" TEXT, "status" BOOL, "Add_User" INTEGER, "Mode_User" INTEGER, "curr_lang_id" INTEGER, "Add_DateTime" DATETIME, "Mode_DateTime" DATETIME);';
 Create_Tables_Query[1] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_app_langs" ("lang_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "lang_code" VARCHAR, "lang_title" VARCHAR, "status" INTEGER);';
-Create_Tables_Query[2] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_daily_songs" ("daily_song_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "offline_song" VARCHAR, "online_song" VARCHAR, "day" INTEGER, "status" INTEGER, "sort" INTEGER, "Add_User" INTEGER, "Mode_User" INTEGER, "Add_DateTime" DATETIME,"Mode_DateTime" DATETIME);';
+Create_Tables_Query[2] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_daily_songs" ("daily_song_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ,"songTitle" VARCHAR, "offline_song" VARCHAR, "online_song" VARCHAR, "day" INTEGER, "status" INTEGER, "sort" INTEGER, "Add_User" INTEGER, "Mode_User" INTEGER, "Add_DateTime" DATETIME,"Mode_DateTime" DATETIME);';
 Create_Tables_Query[3] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_main_cat" ("cat_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "parent_cat_id" INTEGER DEFAULT 0, "sort" INTEGER DEFAULT 99, "status" INTEGER DEFAULT 1, "online_bg_img" TEXT, "offline_bg_img" TEXT, "Add_User" INTEGER, "Mode_User" INTEGER, "Add_DateTime" DATETIME, "Mode_DateTime" DATETIME);';
 Create_Tables_Query[4] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_main_cat_des" ("cat_des_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "cat_id" INTEGER, "lang_id" INTEGER, "name" VARCHAR, "status" INTEGER DEFAULT 1);';
 Create_Tables_Query[5] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_posts" ("post_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "cat_id" INTEGER, "offline_thumb_img" TEXT, "online_thumb_img" TEXT, "offline_song" TEXT, "online_song" TEXT, "status" INTEGER DEFAULT 1, "sort" INTEGER DEFAULT 99, "Add_User" INTEGER, "Mode_User" INTEGER, "Add_DateTime" DATETIME, "Mode_DateTime" DATETIME);';
@@ -31,6 +31,14 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
     $scope.app_title = "RGYAN";
     $scope.MainCategory = {};
     $scope.MainCatStatus = ""; //intially show to user
+    $scope.soundStatus = "fa-volume-up";
+    $scope.preloader = "";
+
+
+    $scope.Day = "SUNDAY";
+    $scope.SongName = "Hanuman Chalisa";
+    
+    $scope.AudioPlayer = document.getElementById("AudioPlayer");
 
     $scope.MainSubCategory = {};
     $scope.MainSubCatStatus = "hidden"; ////intially hide from user
@@ -50,7 +58,37 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
 
 
     };
+    $scope.Play_stop = function (song) {
 
+
+        if (typeof song !== "undefined" && song.length !== 0 && song !==0)
+        {
+            $scope.soundStatus = "fa-volume-up";
+            $scope.PlaySong = "mp3/" + song;
+            $scope.SongName = "Palying...";
+            $scope.AudioPlayer.muted = false;
+
+        }
+        else
+        {
+            if ($scope.soundStatus === "fa-volume-up")
+            {
+                $scope.soundStatus = "fa fa-volume-off";
+                $scope.AudioPlayer.muted = true;
+            }
+            else
+            {
+                $scope.soundStatus = "fa-volume-up";
+                $scope.AudioPlayer.muted = false;
+            }
+        }
+
+
+
+
+
+
+    };
     $scope.Synronize = function () {
         //next day syncronization ....
         // app.receivedEvent('deviceready');
@@ -306,11 +344,18 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
 
     };
 
+
+    $scope.ChangeLanguage = function (id)
+    {
+        $scope.curr_lang_id = id;
+        $scope.appInit();
+    };
+
     $scope.DownloadDataBase = function () {
 
         //Download database from server and store in $scope.response
-        //.$http.get("http://nexgen/rgyan_app/index.php/api/")
-        $http.get("sql/data.json")
+      //  $http.get("http://nexgen/rgyan_app/index.php/api/")
+       $http.get("sql/data.json")
                 .then(function (response) {
                     $scope.response = response.data;
 
@@ -357,6 +402,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
         $scope.getBasicSetting();
         $scope.getMainCategory();
         $scope.DailySongs();
+        $scope.preloader="hidden";
 
     };
 
@@ -434,7 +480,14 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
 
     };
 
+    $scope.subString = function (name)
+    {
 
+        //sub string the title of sub category
+        if (name.length > 20)
+            name = name.substring(1, 20) + "...";
+        return name;
+    };
     $scope.show_sub_category = function (parent_id) {
         $scope.MainSubCategory = {};
         //$scope.$apply();
@@ -456,7 +509,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
                                 console.log(results.rows.item(i).cat_id);
                                 MainSubCategory[i] = {cat_id: results.rows.item(i).cat_id,
                                     offline_bg_img: results.rows.item(i).offline_bg_img,
-                                    name: results.rows.item(i).name};
+                                    name: $scope.subString(results.rows.item(i).name)};
 
 
                                 //   $("#TableData").append("<tr><td>" + results.rows.item(i).id + "</td><td>" + results.rows.item(i).title + "</td><td>" + results.rows.item(i).desc + "</td></tr>");
@@ -701,20 +754,31 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
     {
         var d = new Date();
         var n = d.getDay();
-        // console.log("day"+n);
 
+        var weekday = new Array(7);
+        weekday[0] = "Sunday";
+        weekday[1] = "Monday";
+        weekday[2] = "Tuesday";
+        weekday[3] = "Wednesday";
+        weekday[4] = "Thursday";
+        weekday[5] = "Friday";
+        weekday[6] = "Saturday";
+        // console.log("day"+n);
+        $scope.Day = weekday[n];
         if (db)
         {
             db.transaction(function (transaction) {
 
-                var sql = "SELECT offline_song from nrgyn_daily_songs where day =" + n;
+                var sql = "SELECT offline_song,songTitle from nrgyn_daily_songs where day =" + (n + 1);
                 transaction.executeSql(sql, []
                         , function (tx, results) {
                             console.log("day row" + results.rows);
                             console.log(results.rows);
                             $scope.PlaySong = "mp3/" + results.rows.item(0).offline_song;
+                            $scope.SongName = results.rows.item(0).songTitle;
+
                             $scope.$apply();
-                           // document.getElementById('player').src = $scope.PlaySong;
+                            // document.getElementById('player').src = $scope.PlaySong;
                             //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
                             console.log(results.rows.item(0).offline_song);

@@ -40,6 +40,7 @@
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <script src="js/angular.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        
         <!--      <link href="./css/navbar-fixed-top.css" rel="stylesheet">-->
     </head>
     <body ng-app="rgyan"  class="container-fluid" >
@@ -50,11 +51,11 @@
                         <li ng-click="backScreen()">
                             <span class="fa {{homeIcon}}"></span>   
                         </li>
-                        <li class="language">
+                        <li class="language languageBorder" ng-click="ChangeLanguage(1)">
                             <span >En</span>   
                         </li>
-                        <li class="language">
-                            <span ng-click="close_aap()"  >Hi</span>   
+                        <li class="language" ng-click="ChangeLanguage(2)">
+                            <span   >Hi</span>   
                         </li>
 
                         <li class="appName">
@@ -63,6 +64,10 @@
 
                     </ul>
                 </div> 
+                
+                <div class="preloader {{preloader}}">
+                    <i style=" margin: 45% auto;" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                </div>
 
                 <div class=" {{MainCatStatus}}">
 
@@ -141,11 +146,21 @@
 
             </div>
 
-
-            <audio  class="player" ng-src="{{PlaySong}}" controls ="loop" autoplay="true" >
-                <source id="player"  type="audio/mpeg" >
+            <div class="audioPlayer">
+                <h1 class="DayName">{{Day}}</h1>
+                <div class="songDetails">
+                    <span class="currentPlaytitle">Current Playing.</span>
+                    <span>{{SongName}}</span>
+                </div>
+                <div class="Sound">
+                    <span class="fa {{soundStatus}}" ng-click="Play_stop(0)"/>
+<!--                    fa fa-volume-off-->
+                </div>
+                <audio  class="player" id="AudioPlayer" ng-src="{{PlaySong}}" controls ="loop" autoplay="true" >
+                <source  type="audio/mpeg" >
                 Your browser does not support the <code>audio</code> tag.
             </audio>
+            </div>
         </div>
 
 
