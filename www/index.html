@@ -52,10 +52,10 @@
                             <span class="fa {{homeIcon}}"></span>   
                         </li>
                         <li class="language languageBorder" ng-click="ChangeLanguage(1)">
-                            <span >En</span>   
+                            <span >Hi</span>   
                         </li>
                         <li class="language" ng-click="ChangeLanguage(2)">
-                            <span   >Hi</span>   
+                            <span   >En</span>   
                         </li>
 
                         <li class="appName">
@@ -136,7 +136,7 @@
                             {{post.post_desc}}
 
                         </p>
-                        <span class="fa fa-play-circle songIcon"></span>
+                        <span class="fa fa-play-circle songIcon" ng-click="Play_stop(post.offline_song)"></span>
 
 
                     </div>
@@ -170,7 +170,7 @@
 
 
 <script type="text/javascript" src="js/index.js"></script>
-<!--<script type="text/javascript" src="js/syncro.js"></script>-->
+<script type="text/javascript" src="js/syncro.js"></script>
 <!--  {{CreateDatabase()}}-->
 <script type="text/javascript" src="js/setting.js"></script>
 

@@ -1,7 +1,7 @@
 var db;
-var shortName = "rapidFirethree";
+var shortName = "netfixit";
 var version = "1.6";
-var displayName = "rapidFirethree";
+var displayName = "netfixit";
 var maxSize = 10 * 1024;
 
 var Create_Tables_Query = new Array();
@@ -33,11 +33,12 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
     $scope.MainCatStatus = ""; //intially show to user
     $scope.soundStatus = "fa-volume-up";
     $scope.preloader = "";
+    $scope.message = "";
 
 
     $scope.Day = "SUNDAY";
     $scope.SongName = "Hanuman Chalisa";
-    
+
     $scope.AudioPlayer = document.getElementById("AudioPlayer");
 
     $scope.MainSubCategory = {};
@@ -47,12 +48,13 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
 
     $scope.PostDesc = {};
     $scope.PostDescStatus = "hidden";
+    $scope.siteUrl="http://admin.r-gyan.com/";
 
 
     $scope.backScreenid = 0; // increment upt0 4;
     $scope.homeIcon = "fa-home"; //option fa-chevron-left
 
-    $scope.curr_lang_id = 1;
+    $scope.curr_lang_id = 2;
     $scope.mantra = [{"mantra": "My ram matra"}, {"mantra": "My hanuman matra1"}, {"mantra": "My shiv matra12"}];
     $scope.close_aap = function () {
 
@@ -61,7 +63,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
     $scope.Play_stop = function (song) {
 
 
-        if (typeof song !== "undefined" && song.length !== 0 && song !==0)
+        if (typeof song !== "undefined" && song.length !== 0 && song !== 0)
         {
             $scope.soundStatus = "fa-volume-up";
             $scope.PlaySong = "mp3/" + song;
@@ -146,7 +148,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
         {
             console.log("Database open..");
             $scope.CreateTables(0);
-           
+
             //            $scope.appInit();
             //  console.log("created");
         } else
@@ -182,10 +184,10 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
                             });
                 });
             }
-            
-            if(i== Create_Tables_Query.length)
+
+            if (i == Create_Tables_Query.length)
             {
-                 $scope.DownloadDataBase();
+                $scope.DownloadDataBase();
             }
 
 
@@ -359,8 +361,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
     $scope.DownloadDataBase = function () {
 
         //Download database from server and store in $scope.response
-      //  $http.get("http://nexgen/rgyan_app/index.php/api/")
-       $http.get("sql/data.json")
+        $http.get($scope.siteUrl+"index.php/api/")
+                // $http.get("sql/data.json")
                 .then(function (response) {
                     $scope.response = response.data;
 
@@ -404,10 +406,12 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
 
     $scope.appInit = function () {
         console.log("app initialted");
+       // $scope.assetsDownload();
+
         $scope.getBasicSetting();
         $scope.getMainCategory();
         $scope.DailySongs();
-        $scope.preloader="hidden";
+        $scope.preloader = "hidden";
 
     };
 
@@ -602,6 +606,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
         }
     };
 
+
+
     $scope.show_post_desc = function (post_des_id) {
         $scope.PostDesc = {};
         console.log(post_des_id);
@@ -612,7 +618,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
         {
             db.transaction(function (transaction) {
 
-                var sql = "SELECT DISTINCT pd.post_des_id, p.post_id,p.offline_thumb_img,pd.post_title,pd.post_desc from nrgyn_posts as p left join nrgyn_posts_des as pd on p.post_id = pd.post_id  where pd.post_des_id =" + post_des_id + " and pd.lang_id = " + $scope.curr_lang_id;
+                var sql = "SELECT DISTINCT pd.post_des_id, p.post_id,p.offline_song,p.offline_thumb_img,pd.post_title,pd.post_desc from nrgyn_posts as p left join nrgyn_posts_des as pd on p.post_id = pd.post_id  where pd.post_des_id =" + post_des_id + " and pd.lang_id = " + $scope.curr_lang_id;
                 transaction.executeSql(sql, []
                         , function (tx, results) {
                             console.log(results.rows);
@@ -626,7 +632,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
                                 post[i] = {post_id: results.rows.item(i).post_id,
                                     offline_thumb_img: results.rows.item(i).offline_thumb_img,
                                     post_title: results.rows.item(i).post_title,
-                                    post_desc: results.rows.item(i).post_desc
+                                    post_desc: results.rows.item(i).post_desc,
+                                    offline_song: results.rows.item(i).offline_song
                                 };
 
 
@@ -793,6 +800,89 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
                 });
             });
         }
+
+    };
+
+    $scope.assetsDownload = function ()
+    {
+        if (db)
+        {
+            db.transaction(function (transaction) {
+                transaction.executeSql("SELECT offline_bg_img FROM nrgyn_main_cat", [], function (tx, results) {
+                    console.log(results.rows.item);
+                    var len = results.rows.length, i;
+                    //$("#rowCount").append(len);
+                    for (i = 0; i < len; i++) {
+                        var image = results.rows.item(i).offline_bg_img;
+                        var url = $scope.siteUrl+"upload/img/" + image;
+                        var path = "img/";
+                        $scope.fileDownload(url, image, path);
+//                                                $("#TableData").append("<tr><td>" + results.rows.item(i).id + "</td><td>" + results.rows.item(i).title + "</td><td>" + results.rows.item(i).desc + "</td></tr>");
+                    }
+                }, null);
+            });
+
+        }
+        else
+        {
+
+
+            console.log("db not access");
+        }
+    };
+
+    $scope.fileDownload = function (url, name, savePath) {
+
+        //var url = "http://www.intelligrape.com/images/logo.png"; // image url
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+            // /with savepath 
+            var imagePath = fs.root.fullPath + savePath + name;
+           // var imagePath = "file://sdcard/rgyanappdata" + savePath + name;
+            
+            //"/logo.png"; // full file path
+            // $scope.message =fs.root.fullPath;
+            var fileTransfer = new FileTransfer();
+            fileTransfer.download(url, imagePath, function (entry) {
+                console.log(entry.fullPath); // entry is fileEntry object
+                //$scope.message = entry.fullPath;
+                 $scope.message =entry.fullPath;
+            }, function (error) {
+                // $scope.message = "error file downloading";
+                console.log("download error source " + error.source);
+                console.log("download error target " + error.target);
+                console.log("upload error code: " + error.code);
+                $scope.message = error.target;
+                console.log(error);
+            });
+        });
+        //other
+
+//        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function gotFS(fileSystem) {
+//            fileSystem.root.getDirectory("/img", {create: true}, function fileSystemSuccess(fileSystem) {
+//                fileSystem.getFile("dummy.txt", {create: true, exclusive: false}, function gotFileEntry(fileEntry) {
+//                    var path = fileEntry.fullPath.replace("dummy.txt", "");
+//                    fileEntry.remove();
+//
+//                    var imagePath = fileEntry.fullPath + savePath+ name;
+//                    //"/logo.png"; // full file path
+//                    // $scope.message =fs.root.fullPath;
+//
+//
+//                    var fileTransfer = new FileTransfer();
+//                    fileTransfer.download(url, imagePath, function (theFile) {
+//                        $scope.message = theFile.toURI();
+//                        alert("File Downloaded Successfully " + theFile.toURI());
+//                    }, function (error) {
+//                        $scope.message = error.message;
+//                        $scope.$apply();
+//                    });
+//                }, function () {
+//                     $scope.message = "gotFileEntry";
+//                });
+//            });
+//        }, function () {
+//            $scope.message = "gotFS";
+//        });
 
     };
 

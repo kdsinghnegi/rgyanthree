@@ -62,6 +62,8 @@ div.navigator ul li span
 div.main_god_container
 {
     margin: 48px auto;
+    margin-bottom: 60px;
+    float: left;
 }
 
 div.main_god_container div.godDiv
