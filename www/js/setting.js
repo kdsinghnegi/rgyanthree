@@ -385,7 +385,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
                 });
             }catch(err)
             {
-                
+                $scope.appInit();
             }
 
     };
