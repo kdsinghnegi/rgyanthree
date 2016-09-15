@@ -370,6 +370,10 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
     $scope.DownloadDataBase = function () {
 
         //Download database from server and store in $scope.response
+        
+        document.addEventListener("offline", $scope.appInit(), false);
+        
+        
         try
         {
         $http.get($scope.siteUrl + "index.php/api/")
