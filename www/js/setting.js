@@ -382,6 +382,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
                     // $scope.CreateDatabase();
                     console.log($scope.response);
                     //     console.log(response.data);
+                },function(response){
+                    $scope.appInit();
                 });
             }catch(err)
             {
