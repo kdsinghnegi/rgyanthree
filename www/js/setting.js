@@ -370,6 +370,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
     $scope.DownloadDataBase = function () {
 
         //Download database from server and store in $scope.response
+        try
+        {
         $http.get($scope.siteUrl + "index.php/api/")
                 // $http.get("sql/data.json")
                 .then(function (response) {
@@ -381,6 +383,10 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
                     console.log($scope.response);
                     //     console.log(response.data);
                 });
+            }catch(err)
+            {
+                
+            }
 
     };
 
