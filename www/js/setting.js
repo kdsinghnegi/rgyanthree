@@ -1,7 +1,7 @@
 var db;
-var shortName = "netfixit";
+var shortName = "rgyannewdb";
 var version = "1.6";
-var displayName = "netfixit";
+var displayName = "rgyannewdb   ";
 var maxSize = 10 * 1024;
 
 var Create_Tables_Query = new Array();
@@ -28,7 +28,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
     $scope.nrgyn_posts_des = '';
     $scope.PlaySong = "";//songname;
 
-    $scope.app_title = "RGYAN";
+    $scope.app_title = "RGYAN MANTRA";
     $scope.MainCategory = {};
     $scope.MainCatStatus = ""; //intially show to user
     $scope.soundStatus = "fa-volume-up";
@@ -48,7 +48,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
 
     $scope.PostDesc = {};
     $scope.PostDescStatus = "hidden";
-    $scope.siteUrl="http://admin.r-gyan.com/";
+    $scope.siteUrl = "http://admin.r-gyan.com/";
 
 
     $scope.backScreenid = 0; // increment upt0 4;
@@ -60,10 +60,19 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
 
 
     };
+
+    $scope.checkSong = function (song)
+    {
+        console.log("Song " + song);
+        if (typeof song !== "undefined" && song !== 0 && song !== null)
+            return true;
+        return false;
+    };
+
     $scope.Play_stop = function (song) {
 
 
-        if (typeof song !== "undefined" && song.length !== 0 && song !== 0)
+        if (typeof song !== "undefined" && song !== 0 && song !== null)
         {
             $scope.soundStatus = "fa-volume-up";
             $scope.PlaySong = "mp3/" + song;
@@ -361,7 +370,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
     $scope.DownloadDataBase = function () {
 
         //Download database from server and store in $scope.response
-        $http.get($scope.siteUrl+"index.php/api/")
+        $http.get($scope.siteUrl + "index.php/api/")
                 // $http.get("sql/data.json")
                 .then(function (response) {
                     $scope.response = response.data;
@@ -444,7 +453,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
         if (db)
         {
             db.transaction(function (transaction) {
-                var sql = "SELECT mc.cat_id,mc.offline_bg_img,mcd.name from nrgyn_main_cat as mc left join nrgyn_main_cat_des as mcd on mc.cat_id =mcd.cat_id  where mc.parent_cat_id = " + parent_id + " and mcd.lang_id = " + $scope.curr_lang_id;
+                var sql = "SELECT mc.cat_id,mc.offline_bg_img,mcd.name from nrgyn_main_cat as mc left join nrgyn_main_cat_des as mcd on mc.cat_id =mcd.cat_id  where mc.parent_cat_id = " + parent_id + " and mcd.status=1 and mcd.lang_id = " + $scope.curr_lang_id;
                 transaction.executeSql(sql, []
                         , function (tx, results) {
                             console.log(results.rows);
@@ -493,8 +502,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
     {
 
         //sub string the title of sub category
-        if (name.length > 20)
-            name = name.substring(1, 20) + "...";
+        if (name.length > 15)
+            name = name.substring(1, 15) + "...";
         return name;
     };
     $scope.show_sub_category = function (parent_id) {
@@ -505,7 +514,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
         if (db)
         {
             db.transaction(function (transaction) {
-                var sql = "SELECT mc.cat_id,mc.offline_bg_img,mcd.name from nrgyn_main_cat as mc left join nrgyn_main_cat_des as mcd on mc.cat_id =mcd.cat_id  where mc.parent_cat_id =" + parent_id + " and mcd.lang_id = " + $scope.curr_lang_id;
+                var sql = "SELECT mc.cat_id,mc.offline_bg_img,mcd.name from nrgyn_main_cat as mc left join nrgyn_main_cat_des as mcd on mc.cat_id =mcd.cat_id  where mc.parent_cat_id =" + parent_id + " and mcd.status=1 and mcd.lang_id = " + $scope.curr_lang_id;
                 transaction.executeSql(sql, []
                         , function (tx, results) {
                             console.log(results.rows);
@@ -561,7 +570,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
         {
             db.transaction(function (transaction) {
 
-                var sql = "SELECT p.post_id,p.offline_thumb_img,pd.post_title,pd.post_desc,pd.post_des_id from nrgyn_posts as p left join nrgyn_posts_des as pd on p.post_id =pd.post_id  where p.cat_id =" + cat_id + " and pd.lang_id = " + $scope.curr_lang_id;
+                var sql = "SELECT p.post_id,p.offline_thumb_img,pd.post_title,pd.post_desc,pd.post_des_id from nrgyn_posts as p left join nrgyn_posts_des as pd on p.post_id =pd.post_id  where p.cat_id =" + cat_id + " and p.status=1 and pd.lang_id = " + $scope.curr_lang_id;
                 transaction.executeSql(sql, []
                         , function (tx, results) {
                             console.log(results.rows);
@@ -814,7 +823,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
                     //$("#rowCount").append(len);
                     for (i = 0; i < len; i++) {
                         var image = results.rows.item(i).offline_bg_img;
-                        var url = $scope.siteUrl+"upload/img/" + image;
+                        var url = $scope.siteUrl + "upload/img/" + image;
                         var path = "img/";
                         $scope.fileDownload(url, image, path);
 //                                                $("#TableData").append("<tr><td>" + results.rows.item(i).id + "</td><td>" + results.rows.item(i).title + "</td><td>" + results.rows.item(i).desc + "</td></tr>");
@@ -836,16 +845,19 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
         //var url = "http://www.intelligrape.com/images/logo.png"; // image url
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
             // /with savepath 
-            var imagePath = fs.root.fullPath + savePath + name;
-           // var imagePath = "file://sdcard/rgyanappdata" + savePath + name;
-            
+
+            // fs.root.getDirectory('img', { create: true });
+            var imagePath = cordova.file.dataDirectory + savePath + name;
+            // var imagePath = "file://sdcard/rgyanappdata" + savePath + name;
+            //  cordova.file.dataDirectory;
             //"/logo.png"; // full file path
-            // $scope.message =fs.root.fullPath;
+            $scope.message = fs.root.fullPath;
             var fileTransfer = new FileTransfer();
             fileTransfer.download(url, imagePath, function (entry) {
                 console.log(entry.fullPath); // entry is fileEntry object
                 //$scope.message = entry.fullPath;
-                 $scope.message =entry.fullPath;
+
+                //  $scope.message = cordova.file.dataDirectory;
             }, function (error) {
                 // $scope.message = "error file downloading";
                 console.log("download error source " + error.source);
@@ -854,6 +866,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http) {
                 $scope.message = error.target;
                 console.log(error);
             });
+        },function(error){
+            $scope.message = "Erro file handlong.." + error.code;
         });
         //other
 

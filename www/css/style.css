@@ -86,6 +86,7 @@ div.main_god_container h1.godTitle
     text-align: center;
     color: #2b2b2b;
     font-family: Arial,sans-serif;
+    text-transform: capitalize;
 }
 
 div.MantraContainer
@@ -113,12 +114,12 @@ div.mantra img
 
 div.mantra p
 {
-    font-size: 13px;
+    font-size: 15px;
     font-family: arial,sans-serif;
     color: #3a3a3a;
     margin: 0;
-    padding: 3px;
-    text-align: left;
+    padding: 7px;
+    text-align: center;
 }
 div.mantra p span
 {
@@ -202,9 +203,8 @@ ul.main_category li h1
     text-align: center;
     text-transform: uppercase;
     padding: 11%;
-    background: white;
+    background: #444444;
     margin: 4px;
-
     background-image: url('../img/godhanuman.jpg');
     background-size: cover;
     color: white;
@@ -306,4 +306,20 @@ div.preloader
     z-index: 9999999;
     background: white;
     text-align: center;
+}
+div.subcatImg
+{
+    
+}
+
+h1.MantraTitleCustom
+{
+    text-align: center;
+    font-size: 16px !important;
+    background: white;
+    margin: 10px auto;
+}
+p.postDescibe
+{
+    text-align: left !important;
 }

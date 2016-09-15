@@ -59,7 +59,7 @@
                         </li>
 
                         <li class="appName">
-                            <h1>{{app_title}}</h1>
+                            <h1>{{app_title}} </h1>
                         </li>
 
                     </ul>
@@ -82,11 +82,12 @@
                     </ul>
                 </div>
 
-                <div class="main_god_container col-lg-12 {{MainSubCatStatus}}  ">
+                <div class="main_god_container col-lg-12 col-sm-12 col-md-12 {{MainSubCatStatus}}  ">
 
                     <!--                    sub category-->
-                    <div class="godDiv col-xs-6" ng-repeat="sub_cat in MainSubCategory">
+                    <div class="godDiv col-xs-6 col-lg-4 col-sm-4 col-md-4 " ng-repeat="sub_cat in MainSubCategory">
                         <div ng-click="show_post(sub_cat.cat_id)">
+                          
                             <img src="img/{{sub_cat.offline_bg_img}}"/>
                             <h1 class="godTitle">{{sub_cat.name}}</h1>
                         </div>
@@ -107,13 +108,11 @@
                         <div  ng-click="show_post_desc(posts.post_des_id)">
                             <img src="img/{{posts.offline_thumb_img}}"/>
                             <h1 class='postTitle'>{{posts.post_title}}</h1>
-                            <p>
+                            <p class="postDescibe">
                                 {{posts.post_desc}}
-
-
                             </p>
 
-                            <span class="readMore">Read More</span> <span class="fa fa-play-circle "></span>
+                            <span class="readMore">Read More</span> <span ng-if="checkSong(post.offline_song)" class="fa fa-play-circle "></span>
                         </div>
                     </div>
 
@@ -129,14 +128,15 @@
                     <!--                    {{PostDesc}}-->
                     <div class="mantra " ng-repeat="post in PostDesc">
 
-                        <h1 class="MantraTitle">
+                        <h1 class="MantraTitle MantraTitleCustom">
                             {{post.post_title}}
                         </h1>
                         <p>
                             {{post.post_desc}}
 
                         </p>
-                        <span class="fa fa-play-circle songIcon" ng-click="Play_stop(post.offline_song)"></span>
+                      
+                        <span ng-if="checkSong(post.offline_song)" class="fa fa-play-circle songIcon" ng-click="Play_stop(post.offline_song)"></span>
 
 
                     </div>
