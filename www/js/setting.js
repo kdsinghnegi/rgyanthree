@@ -437,7 +437,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
         $scope.getMainCategory();
         $scope.DailySongs();
         $scope.preloader = "hidden";
-        $scope.assetsDownload();
+    //    $scope.assetsDownload();
 
     };
 
