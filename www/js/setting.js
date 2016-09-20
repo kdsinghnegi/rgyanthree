@@ -431,12 +431,13 @@ ang_app.controller("rgyanCotrl", function ($scope, $http,$sce) {
 
     $scope.appInit = function () {
         console.log("app initialted");
-        $scope.assetsDownload();
+       
 
         $scope.getBasicSetting();
         $scope.getMainCategory();
         $scope.DailySongs();
         $scope.preloader = "hidden";
+         $scope.assetsDownload();
 
     };
 
@@ -856,22 +857,22 @@ ang_app.controller("rgyanCotrl", function ($scope, $http,$sce) {
             
             
             ///start download post files
-             db.transaction(function (transaction) {
-                transaction.executeSql("SELECT offline_thumb_img FROM nrgyn_posts", [], function (tx, results) {
-                    console.log(results.rows.item);
-                    var len = results.rows.length, i;
-                    //$("#rowCount").append(len);
-                    for (i = 0; i < len; i++) {
-                        var image = results.rows.item(i).offline_thumb_img;
-                        var url = $scope.siteUrl + "upload/img/" + image;
-                        var path = "img/";
-                        
-                       // $scope.downloading = i + "/" +len;
-                        $scope.fileDownload(url, image, path);
-//                                                $("#TableData").append("<tr><td>" + results.rows.item(i).id + "</td><td>" + results.rows.item(i).title + "</td><td>" + results.rows.item(i).desc + "</td></tr>");
-                    }
-                }, null);
-            });
+//             db.transaction(function (transaction) {
+//                transaction.executeSql("SELECT offline_thumb_img FROM nrgyn_posts", [], function (tx, results) {
+//                    console.log(results.rows.item);
+//                    var len = results.rows.length, i;
+//                    //$("#rowCount").append(len);
+//                    for (i = 0; i < len; i++) {
+//                        var image = results.rows.item(i).offline_thumb_img;
+//                        var url = $scope.siteUrl + "upload/img/" + image;
+//                        var path = "img/";
+//                        
+//                       // $scope.downloading = i + "/" +len;
+//                        $scope.fileDownload(url, image, path);
+////                                                $("#TableData").append("<tr><td>" + results.rows.item(i).id + "</td><td>" + results.rows.item(i).title + "</td><td>" + results.rows.item(i).desc + "</td></tr>");
+//                    }
+//                }, null);
+//            });
             
             //end  /// download post files
 
