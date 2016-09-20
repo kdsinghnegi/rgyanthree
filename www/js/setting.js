@@ -1,7 +1,7 @@
 var db;
-var shortName = "rgyannewdbtest";
+var shortName = "rgyannewdb";
 var version = "1.6";
-var displayName = "rgyannewdbtest";
+var displayName = "rgyannewdb   ";
 var maxSize = 10 * 1024;
 
 var Create_Tables_Query = new Array();
@@ -14,7 +14,7 @@ Create_Tables_Query[5] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_posts" ("post_id" 
 Create_Tables_Query[6] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_posts_des" ("post_des_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "post_id" INTEGER, "lang_id" INTEGER, "post_title" TEXT, "post_desc" TEXT, "status" INTEGER DEFAULT 1);';
 
 var ang_app = angular.module("rgyan", []);
-ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
+ang_app.controller("rgyanCotrl", function ($scope, $http) {
 
 
 
@@ -28,15 +28,12 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
     $scope.nrgyn_posts_des = '';
     $scope.PlaySong = "";//songname;
 
-
-    $scope.ImageDir = cordova.file.dataDirectory;
     $scope.app_title = "RGYAN MANTRA";
     $scope.MainCategory = {};
     $scope.MainCatStatus = ""; //intially show to user
     $scope.soundStatus = "fa-volume-up";
     $scope.preloader = "";
     $scope.message = "";
-    $scope.downloading = "";
 
 
     $scope.Day = "SUNDAY";
@@ -141,7 +138,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
     $scope.CreateDatabase = function () {
 
         //        $scope.DownloadDataBase();
-        // $scope.Synronize();
+        $scope.Synronize();
         //   angular.element(document).addEventListener("deviceready", function () {
         //    console.log("load 1");
         if (!window.openDatabase) {
@@ -159,7 +156,6 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
         if (db)
         {
             console.log("Database open..");
-
             $scope.CreateTables(0);
 
             //            $scope.appInit();
@@ -374,29 +370,29 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
     $scope.DownloadDataBase = function () {
 
         //Download database from server and store in $scope.response
-
+        
         document.addEventListener("offline", $scope.appInit(), false);
-
-
+        
+        
         try
         {
-            $http.get($scope.siteUrl + "index.php/api/")
-                    // $http.get("sql/data.json")
-                    .then(function (response) {
-                        $scope.response = response.data;
+        $http.get($scope.siteUrl + "index.php/api/")
+                // $http.get("sql/data.json")
+                .then(function (response) {
+                    $scope.response = response.data;
 
-                        $scope.ImportDataInTables();
-                        //  $scope.CreateDatabase()
-                        // $scope.CreateDatabase();
-                        console.log($scope.response);
-                        //     console.log(response.data);
-                    }, function (response) {
-                        $scope.appInit();
-                    });
-        } catch (err)
-        {
-            $scope.appInit();
-        }
+                    $scope.ImportDataInTables();
+                    //  $scope.CreateDatabase()
+                    // $scope.CreateDatabase();
+                    console.log($scope.response);
+                    //     console.log(response.data);
+                },function(response){
+                    $scope.appInit();
+                });
+            }catch(err)
+            {
+                $scope.appInit();
+            }
 
     };
 
@@ -431,13 +427,12 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
     $scope.appInit = function () {
         console.log("app initialted");
-
+       // $scope.assetsDownload();
 
         $scope.getBasicSetting();
         $scope.getMainCategory();
         $scope.DailySongs();
         $scope.preloader = "hidden";
-    //    $scope.assetsDownload();
 
     };
 
@@ -520,11 +515,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
         //sub string the title of sub category
         if (name.length > 15)
-        {
-            name = name.replace(/<\/?[^>]+(>|$)/g, "");
-            name = name.substring(0, 15) + "...";
-
-        }
+            name = name.substring(1, 15) + "...";
         return name;
     };
     $scope.show_sub_category = function (parent_id) {
@@ -846,40 +837,11 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                         var image = results.rows.item(i).offline_bg_img;
                         var url = $scope.siteUrl + "upload/img/" + image;
                         var path = "img/";
-
-                        var fileUrlInlocal = $scope.ImageDir + path + image;
-                        if(!$scope.fileExists(fileUrlInlocal))
-                        {
-                            $scope.fileDownload(url, image, path);
-                        }
-                        // $scope.downloading = i + "/" +len;
-                        
+                        $scope.fileDownload(url, image, path);
 //                                                $("#TableData").append("<tr><td>" + results.rows.item(i).id + "</td><td>" + results.rows.item(i).title + "</td><td>" + results.rows.item(i).desc + "</td></tr>");
                     }
                 }, null);
             });
-
-
-
-            ///start download post files
-//             db.transaction(function (transaction) {
-//                transaction.executeSql("SELECT offline_thumb_img FROM nrgyn_posts", [], function (tx, results) {
-//                    console.log(results.rows.item);
-//                    var len = results.rows.length, i;
-//                    //$("#rowCount").append(len);
-//                    for (i = 0; i < len; i++) {
-//                        var image = results.rows.item(i).offline_thumb_img;
-//                        var url = $scope.siteUrl + "upload/img/" + image;
-//                        var path = "img/";
-//                        
-//                       // $scope.downloading = i + "/" +len;
-//                        $scope.fileDownload(url, image, path);
-////                                                $("#TableData").append("<tr><td>" + results.rows.item(i).id + "</td><td>" + results.rows.item(i).title + "</td><td>" + results.rows.item(i).desc + "</td></tr>");
-//                    }
-//                }, null);
-//            });
-
-            //end  /// download post files
 
         }
         else
@@ -890,25 +852,6 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
         }
     };
 
-
-    $scope.fileExists = function (url) {
-        if (url) {
-            var req = new XMLHttpRequest();
-            req.open('GET', url, false);
-            req.send();
-            return req.status == 200;
-        } else {
-            return false;
-        }
-    };
-
-    $scope.reder_html = function (html) {
-
-
-        return $sce.trustAsHtml(html);
-
-    };
-
     $scope.fileDownload = function (url, name, savePath) {
 
         //var url = "http://www.intelligrape.com/images/logo.png"; // image url
@@ -917,21 +860,17 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
             // fs.root.getDirectory('img', { create: true });
             var imagePath = cordova.file.dataDirectory + savePath + name;
-            //var imagePath = "file://sdcard/" + savePath + name;
+            // var imagePath = "file://sdcard/rgyanappdata" + savePath + name;
             //  cordova.file.dataDirectory;
             //"/logo.png"; // full file path
-            //  $scope.message = imagePath;
+            $scope.message = fs.root.fullPath;
             var fileTransfer = new FileTransfer();
             fileTransfer.download(url, imagePath, function (entry) {
-                //$scope.downloading +="<br> Downloading..."+url;
                 console.log(entry.fullPath); // entry is fileEntry object
-                // $scope.message = entry.fullPath;
-
-                // alert($scope.message);
+                //$scope.message = entry.fullPath;
 
                 //  $scope.message = cordova.file.dataDirectory;
             }, function (error) {
-                $scope.downloading += "error..." + error.code;
                 // $scope.message = "error file downloading";
                 console.log("download error source " + error.source);
                 console.log("download error target " + error.target);
@@ -939,7 +878,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                 $scope.message = error.target;
                 console.log(error);
             });
-        }, function (error) {
+        },function(error){
             $scope.message = "Erro file handlong.." + error.code;
         });
         //other
