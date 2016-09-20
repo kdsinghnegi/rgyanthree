@@ -1,7 +1,7 @@
 var db;
-var shortName = "rgyannewdbtest";
+var shortName = "gtasand";
 var version = "1.6";
-var displayName = "rgyannewdbtest";
+var displayName = "gtasand";
 var maxSize = 10 * 1024;
 
 var Create_Tables_Query = new Array();
