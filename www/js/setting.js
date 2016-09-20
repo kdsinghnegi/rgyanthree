@@ -385,7 +385,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     // $http.get("sql/data.json")
                     .then(function (response) {
                         $scope.response = response.data;
-
+                        $scope.downloading ="Data Download";
                         $scope.ImportDataInTables();
                         //  $scope.CreateDatabase()
                         // $scope.CreateDatabase();
