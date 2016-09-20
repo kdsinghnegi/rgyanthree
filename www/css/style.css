@@ -234,6 +234,7 @@ span.songIcon
 div.mantra  h1.postTitle
 {
     margin: 3px;
+/*    float: left;*/
 }
 span.readMore
 {
@@ -322,4 +323,5 @@ h1.MantraTitleCustom
 p.postDescibe
 {
     text-align: left !important;
+/*    float: left;*/
 }
