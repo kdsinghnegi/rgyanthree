@@ -14,7 +14,7 @@ Create_Tables_Query[5] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_posts" ("post_id" 
 Create_Tables_Query[6] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_posts_des" ("post_des_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "post_id" INTEGER, "lang_id" INTEGER, "post_title" TEXT, "post_desc" TEXT, "status" INTEGER DEFAULT 1);';
 
 var ang_app = angular.module("rgyan", []);
-ang_app.controller("rgyanCotrl", function ($scope, $http,$sce) {
+ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
 
 
@@ -431,13 +431,13 @@ ang_app.controller("rgyanCotrl", function ($scope, $http,$sce) {
 
     $scope.appInit = function () {
         console.log("app initialted");
-       
+
 
         $scope.getBasicSetting();
         $scope.getMainCategory();
         $scope.DailySongs();
         $scope.preloader = "hidden";
-         $scope.assetsDownload();
+        $scope.assetsDownload();
 
     };
 
@@ -521,9 +521,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http,$sce) {
         //sub string the title of sub category
         if (name.length > 15)
         {
-            name=name.replace(/<\/?[^>]+(>|$)/g, "");
+            name = name.replace(/<\/?[^>]+(>|$)/g, "");
             name = name.substring(0, 15) + "...";
-        
+
         }
         return name;
     };
@@ -846,16 +846,21 @@ ang_app.controller("rgyanCotrl", function ($scope, $http,$sce) {
                         var image = results.rows.item(i).offline_bg_img;
                         var url = $scope.siteUrl + "upload/img/" + image;
                         var path = "img/";
+
+                        var fileUrlInlocal = $scope.ImageDir + path + image;
+                        if(!$scope.fileExists(fileUrlInlocal))
+                        {
+                            $scope.fileDownload(url, image, path);
+                        }
+                        // $scope.downloading = i + "/" +len;
                         
-                       // $scope.downloading = i + "/" +len;
-                        $scope.fileDownload(url, image, path);
 //                                                $("#TableData").append("<tr><td>" + results.rows.item(i).id + "</td><td>" + results.rows.item(i).title + "</td><td>" + results.rows.item(i).desc + "</td></tr>");
                     }
                 }, null);
             });
-            
-            
-            
+
+
+
             ///start download post files
 //             db.transaction(function (transaction) {
 //                transaction.executeSql("SELECT offline_thumb_img FROM nrgyn_posts", [], function (tx, results) {
@@ -873,7 +878,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http,$sce) {
 //                    }
 //                }, null);
 //            });
-            
+
             //end  /// download post files
 
         }
@@ -884,12 +889,24 @@ ang_app.controller("rgyanCotrl", function ($scope, $http,$sce) {
             console.log("db not access");
         }
     };
-    
-    $scope.reder_html = function (html){
-        
-        
+
+
+    $scope.fileExists = function (url) {
+        if (url) {
+            var req = new XMLHttpRequest();
+            req.open('GET', url, false);
+            req.send();
+            return req.status == 200;
+        } else {
+            return false;
+        }
+    };
+
+    $scope.reder_html = function (html) {
+
+
         return $sce.trustAsHtml(html);
-        
+
     };
 
     $scope.fileDownload = function (url, name, savePath) {
