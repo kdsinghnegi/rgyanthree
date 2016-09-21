@@ -393,8 +393,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                         $scope.mylog($scope.response);
                         //     $scope.mylog(response.data);
                     }, function (response) {
-                        $scope.mylog("Error in download database"+response.error);
-                        $scope.appInit();
+                        $scope.mylog("Error in download database"+response.status);
+                     //   $scope.appInit();
                     });
         } catch (err)
         {
