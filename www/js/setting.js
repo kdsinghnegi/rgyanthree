@@ -378,7 +378,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
         document.addEventListener("offline", $scope.appInit(), false);
 
- 
+//        comment
         try
         {
             
