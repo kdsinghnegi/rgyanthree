@@ -117,7 +117,7 @@
                     <div class="mantra" ng-repeat="posts in Post">
 <!--                        {{ImageDir+'/'+posts.offline_thumb_img}}-->
                         <div  ng-click="show_post_desc(posts.post_des_id)">
-                             <div class="subcatBg"  style="height: 100px ; width: 100px ; margin-left: 5px; float: left ;background-size: cover; background-image: url({{ImageDir}}{{posts.offline_thumb_img}})" >
+                             <div class="subcatBg"  style="height: 100px ; width: 100px ; margin-left: 5px; float: left ;background-size: cover; background-image: url({{urlEncode(posts.offline_thumb_img)}})" >
                                 
                             </div>
                             
