@@ -29,7 +29,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
     $scope.PlaySong = "";//songname;
 
 
-//console.log(cordova.file);
+//$scope.mylog(cordova.file);
     $scope.ImageDir = cordova.file.dataDirectory;
     $scope.app_title = "RGYAN MANTRA";
     $scope.MainCategory = {};
@@ -67,7 +67,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
     $scope.checkSong = function (song)
     {
-        console.log("Song " + song);
+        $scope.mylog("Song " + song);
         if (typeof song !== "undefined" && song !== 0 && song !== null)
             return true;
         return false;
@@ -118,23 +118,23 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
         //
         //        sync.on('progress', function (data) {
         //
-        //            console.log("progress");
+        //            $scope.mylog("progress");
         //            // data.progress
         //        });
         //
         //        sync.on('complete', function (data) {
         //            // data.localPath
-        //            console.log("complete");
+        //            $scope.mylog("complete");
         //        });
         //
         //        sync.on('error', function (e) {
-        //            console.log("error");
+        //            $scope.mylog("error");
         //            // e
         //        });
         //
         //        sync.on('cancel', function () {
         //            // triggered if event is cancelled
-        //            console.log("cancel");
+        //            $scope.mylog("cancel");
         //        });
 
 
@@ -144,30 +144,30 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
         //        $scope.DownloadDataBase();
         // $scope.Synronize();
         //   angular.element(document).addEventListener("deviceready", function () {
-        //    console.log("load 1");
+        //    $scope.mylog("load 1");
         if (!window.openDatabase) {
-            console.log("load2");
+            $scope.mylog("load2");
             // not all mobile devices support databases  if it does not, the
-            //following  console.log will display
+            //following  $scope.mylog will display
             // indicating the device will not be albe to run this application
-            //  console.log("Databases are not supported in this browser.");
+            //  $scope.mylog("Databases are not supported in this browser.");
             return;
         }
 
         db = window.openDatabase(shortName, version, displayName, maxSize);
         // var db = window.sqlitePlugin.openDatabase({name: "rgyan.db", location: "default"});
-        //  console.log(db);
+        //  $scope.mylog(db);
         if (db)
         {
-            console.log("Database open..");
+            $scope.mylog("Database open..");
 
             $scope.CreateTables(0);
 
             //            $scope.appInit();
-            //  console.log("created");
+            //  $scope.mylog("created");
         } else
         {
-            //  console.log("not created");
+            //  $scope.mylog("not created");
         }
         //            });
     };
@@ -176,8 +176,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
         if (db)
         {
-            ///  console.log($scope.sql.split(";\n"));
-            //  console.log();
+            ///  $scope.mylog($scope.sql.split(";\n"));
+            //  $scope.mylog();
             // return 0;
 
             //  $scope.processQuery(db, 0, $scope.sql.split(";\n"), shortName);
@@ -188,13 +188,13 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                 db.transaction(function (transaction) {
                     transaction.executeSql(query, [],
                             function (tx, result) {
-                                console.log(query);
-                                console.log("Table " + i + " created successfully");
+                                $scope.mylog(query);
+                                $scope.mylog("Table " + i + " created successfully");
                                 i = i + 1;
                                 $scope.CreateTables(i);
                             },
                             function (tc, error) {
-                                console.log("Error occurred while creating the table." + error.message);
+                                $scope.mylog("Error occurred while creating the table." + error.message);
                             });
                 });
             }
@@ -210,7 +210,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
         }
         else
         {
-            console.log("db not access");
+            $scope.mylog("db not access");
         }
 
     };
@@ -230,9 +230,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     var values = Object.values(setting[i]);
                     //var values =setting[i].valueOf();
                     $scope.insertData(coloumn, values, 'nrgyn_basic_settings');
-                    console.log(setting[i]);
-                    console.log(coloumn);
-                    console.log(values);
+                    $scope.mylog(setting[i]);
+                    $scope.mylog(coloumn);
+                    $scope.mylog(values);
                 }
 
             }
@@ -251,9 +251,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     var values = Object.values(language[i]);
                     //var values =setting[i].valueOf();
                     $scope.insertData(coloumn, values, 'nrgyn_app_langs');
-                    console.log(language[i]);
-                    console.log(coloumn);
-                    console.log(values);
+                    $scope.mylog(language[i]);
+                    $scope.mylog(coloumn);
+                    $scope.mylog(values);
                 }
 
             }
@@ -272,9 +272,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     var values = Object.values(catDesc[i]);
                     //var values =setting[i].valueOf();
                     $scope.insertData(coloumn, values, 'nrgyn_main_cat_des');
-                    console.log(setting[i]);
-                    console.log(coloumn);
-                    console.log(values);
+                    $scope.mylog(setting[i]);
+                    $scope.mylog(coloumn);
+                    $scope.mylog(values);
                 }
 
             }
@@ -292,9 +292,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     var values = Object.values(category[i]);
                     //var values =setting[i].valueOf();
                     $scope.insertData(coloumn, values, 'nrgyn_main_cat');
-                    console.log(category[i]);
-                    console.log(coloumn);
-                    console.log(values);
+                    $scope.mylog(category[i]);
+                    $scope.mylog(coloumn);
+                    $scope.mylog(values);
                 }
 
             }
@@ -312,9 +312,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     var values = Object.values(dailySongs[i]);
                     //var values =setting[i].valueOf();
                     $scope.insertData(coloumn, values, 'nrgyn_daily_songs');
-                    console.log(dailySongs[i]);
-                    console.log(coloumn);
-                    console.log(values);
+                    $scope.mylog(dailySongs[i]);
+                    $scope.mylog(coloumn);
+                    $scope.mylog(values);
                 }
 
             }
@@ -330,9 +330,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     var values = Object.values(post[i]);
                     //var values =setting[i].valueOf();
                     $scope.insertData(coloumn, values, 'nrgyn_posts');
-                    console.log(post[i]);
-                    console.log(coloumn);
-                    console.log(values);
+                    $scope.mylog(post[i]);
+                    $scope.mylog(coloumn);
+                    $scope.mylog(values);
                 }
 
             }
@@ -349,9 +349,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     var values = Object.values(postDesc[i]);
                     //var values =setting[i].valueOf();
                     $scope.insertData(coloumn, values, 'nrgyn_posts_des');
-                    console.log(postDesc[i]);
-                    console.log(coloumn);
-                    console.log(values);
+                    $scope.mylog(postDesc[i]);
+                    $scope.mylog(coloumn);
+                    $scope.mylog(values);
                 }
 
             }
@@ -389,8 +389,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                         $scope.ImportDataInTables();
                         //  $scope.CreateDatabase()
                         // $scope.CreateDatabase();
-                        console.log($scope.response);
-                        //     console.log(response.data);
+                        $scope.mylog($scope.response);
+                        //     $scope.mylog(response.data);
                     }, function (response) {
                         $scope.appInit();
                     });
@@ -420,10 +420,10 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
             var executeQuery = "INSERT OR REPLACE INTO " + table + " (" + coloumn + ") VALUES (" + preQues + ") ";
             transaction.executeSql(executeQuery, values
                     , function (tx, result) {
-                        console.log("Inserted" + table);
+                        $scope.mylog("Inserted" + table);
                     },
                     function (transaction, error) {
-                        console.log("Error: " + error.message + " code: " + error.code);
+                        $scope.mylog("Error: " + error.message + " code: " + error.code);
                     });
         });
 
@@ -431,15 +431,20 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
 
     $scope.appInit = function () {
-        console.log("app initialted");
+        $scope.mylog("app initialted");
 
 
         $scope.getBasicSetting();
         $scope.getMainCategory();
         $scope.DailySongs();
         $scope.preloader = "hidden";
-    //    $scope.assetsDownload();
+     $scope.assetsDownload();
 
+    };
+    
+    $scope.mylog = function(msg)
+    {
+        $scope.downloading+=msg+"<br>";
     };
 
     $scope.getBasicSetting = function () {
@@ -450,15 +455,15 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                 var sql = "SELECT app_title from nrgyn_basic_settings where curr_lang_id = " + $scope.curr_lang_id;
                 transaction.executeSql(sql, []
                         , function (tx, results) {
-                            console.log(results);
-                            console.log(results.rows.item(0).app_title);
+                            $scope.mylog(results);
+                            $scope.mylog(results.rows.item(0).app_title);
 
                             $scope.app_title = results.rows.item(0).app_title;
-                            console.log($scope.app_title);
+                            $scope.mylog($scope.app_title);
                             $scope.$apply();
                         }
                 , function (error) {
-                    console.log(error);
+                    $scope.mylog(error);
                 });
 
             });
@@ -474,14 +479,14 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                 var sql = "SELECT mc.cat_id,mc.offline_bg_img,mcd.name from nrgyn_main_cat as mc left join nrgyn_main_cat_des as mcd on mc.cat_id =mcd.cat_id  where mc.parent_cat_id = " + parent_id + " and mcd.status=1 and mcd.lang_id = " + $scope.curr_lang_id;
                 transaction.executeSql(sql, []
                         , function (tx, results) {
-                            console.log(results.rows);
+                            $scope.mylog(results.rows);
 
 
                             var len = results.rows.length, i;
                             //                        $("#rowCount").append(len);
                             var MainCategory = new Array();
                             for (i = 0; i < len; i++) {
-                                console.log(results.rows.item(i).cat_id);
+                                $scope.mylog(results.rows.item(i).cat_id);
                                 MainCategory[i] = {cat_id: results.rows.item(i).cat_id,
                                     offline_bg_img: results.rows.item(i).offline_bg_img,
                                     name: results.rows.item(i).name};
@@ -491,7 +496,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                             }
 
                             $scope.MainCategory = JSON.parse(JSON.stringify(MainCategory));
-                            console.log($scope.MainCategory);
+                            $scope.mylog($scope.MainCategory);
 
 
 
@@ -505,10 +510,10 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                             $scope.$apply();
                             //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
-                            //                    console.log($scope.app_title);
+                            //                    $scope.mylog($scope.app_title);
                         }
                 , function (error) {
-                    console.log(error);
+                    $scope.mylog(error);
                 });
 
             });
@@ -539,14 +544,14 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                 var sql = "SELECT mc.cat_id,mc.offline_bg_img,mcd.name from nrgyn_main_cat as mc left join nrgyn_main_cat_des as mcd on mc.cat_id =mcd.cat_id  where mc.parent_cat_id =" + parent_id + " and mcd.status=1 and mcd.lang_id = " + $scope.curr_lang_id;
                 transaction.executeSql(sql, []
                         , function (tx, results) {
-                            console.log(results.rows);
+                            $scope.mylog(results.rows);
 
 
                             var len = results.rows.length, i;
                             //                        $("#rowCount").append(len);
                             var MainSubCategory = new Array();
                             for (i = 0; i < len; i++) {
-                                console.log(results.rows.item(i).cat_id);
+                                $scope.mylog(results.rows.item(i).cat_id);
                                 MainSubCategory[i] = {cat_id: results.rows.item(i).cat_id,
                                     offline_bg_img: results.rows.item(i).offline_bg_img,
                                     name: $scope.subString(results.rows.item(i).name)};
@@ -556,7 +561,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                             }
 
                             $scope.MainSubCategory = JSON.parse(JSON.stringify(MainSubCategory));
-                            console.log($scope.MainSubCategory);
+                            $scope.mylog($scope.MainSubCategory);
 
                             $scope.MainSubCatStatus = "";
                             $scope.PostDescStatus = "hidden";
@@ -567,10 +572,10 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                             $scope.$apply();
                             //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
-                            //                    console.log($scope.app_title);
+                            //                    $scope.mylog($scope.app_title);
                         }
                 , function (error) {
-                    console.log(error);
+                    $scope.mylog(error);
                 });
 
             });
@@ -595,14 +600,14 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                 var sql = "SELECT p.post_id,p.offline_thumb_img,pd.post_title,pd.post_desc,pd.post_des_id from nrgyn_posts as p left join nrgyn_posts_des as pd on p.post_id =pd.post_id  where p.cat_id =" + cat_id + " and p.status=1 and pd.lang_id = " + $scope.curr_lang_id;
                 transaction.executeSql(sql, []
                         , function (tx, results) {
-                            console.log(results.rows);
+                            $scope.mylog(results.rows);
 
 
                             var len = results.rows.length, i;
                             //                        $("#rowCount").append(len);
                             var post = new Array();
                             for (i = 0; i < len; i++) {
-                                //  console.log(results.rows.item(i).cat_id);
+                                //  $scope.mylog(results.rows.item(i).cat_id);
                                 post[i] = {post_id: results.rows.item(i).post_id,
                                     offline_thumb_img: results.rows.item(i).offline_thumb_img,
                                     post_title: results.rows.item(i).post_title,
@@ -615,7 +620,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                             }
 
                             $scope.Post = JSON.parse(JSON.stringify(post));
-                            console.log($scope.Post);
+                            $scope.mylog($scope.Post);
 
                             $scope.MainCatStatus = "hidden";
                             $scope.MainSubCatStatus = "hidden";
@@ -628,10 +633,10 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                             $scope.$apply();
                             //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
-                            //                    console.log($scope.app_title);
+                            //                    $scope.mylog($scope.app_title);
                         }
                 , function (error) {
-                    console.log(error);
+                    $scope.mylog(error);
                 });
             });
         }
@@ -641,7 +646,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
     $scope.show_post_desc = function (post_des_id) {
         $scope.PostDesc = {};
-        console.log(post_des_id);
+        $scope.mylog(post_des_id);
         //  $scope.$apply();
         //load the post the sub category is clicked; according to cat_id
 
@@ -652,14 +657,14 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                 var sql = "SELECT DISTINCT pd.post_des_id, p.post_id,p.offline_song,p.offline_thumb_img,pd.post_title,pd.post_desc from nrgyn_posts as p left join nrgyn_posts_des as pd on p.post_id = pd.post_id  where pd.post_des_id =" + post_des_id + " and pd.lang_id = " + $scope.curr_lang_id;
                 transaction.executeSql(sql, []
                         , function (tx, results) {
-                            console.log(results.rows);
+                            $scope.mylog(results.rows);
 
 
                             var len = results.rows.length, i;
                             //                        $("#rowCount").append(len);
                             var post = new Array();
                             for (i = 0; i < len; i++) {
-                                //  console.log(results.rows.item(i).cat_id);
+                                //  $scope.mylog(results.rows.item(i).cat_id);
                                 post[i] = {post_id: results.rows.item(i).post_id,
                                     offline_thumb_img: results.rows.item(i).offline_thumb_img,
                                     post_title: results.rows.item(i).post_title,
@@ -672,7 +677,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                             }
 
                             $scope.PostDesc = JSON.parse(JSON.stringify(post));
-                            console.log($scope.PostDesc);
+                            $scope.mylog($scope.PostDesc);
 
                             $scope.MainCatStatus = "hidden";
                             $scope.MainSubCatStatus = "hidden";
@@ -686,10 +691,10 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                             $scope.$apply();
                             //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
-                            //                    console.log($scope.app_title);
+                            //                    $scope.mylog($scope.app_title);
                         }
                 , function (error) {
-                    console.log(error);
+                    $scope.mylog(error);
                 });
             });
         }
@@ -760,7 +765,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
             db.transaction(function (transaction) {
                 transaction.executeSql("SELECT * FROM phonegap_pro", [], function (tx, results) {
 
-                    console.log(results.rows.item);
+                    $scope.mylog(results.rows.item);
                     //                        var len = results.rows.length, i;
                     //                        $("#rowCount").append(len);
                     //                        for (i = 0; i < len; i++) {
@@ -774,23 +779,23 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
         {
 
 
-            console.log("db not access");
+            $scope.mylog("db not access");
         }
     };
 
 
     $scope.errorHandler = function (transaction, error) {
 
-        console.log("Error: " + error.message + " code: " + error.code);
+        $scope.mylog("Error: " + error.message + " code: " + error.code);
     };
 
     $scope.nullHandler = function (transaction, result) {
-        console.log(result);
+        $scope.mylog(result);
     };
 
 
     $scope.successCallBack = function () {
-        console.log("success");
+        $scope.mylog("success");
     };
 
     $scope.DailySongs = function ()
@@ -806,7 +811,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
         weekday[4] = "Thursday";
         weekday[5] = "Friday";
         weekday[6] = "Saturday";
-        // console.log("day"+n);
+        // $scope.mylog("day"+n);
         $scope.Day = weekday[n];
         if (db)
         {
@@ -815,8 +820,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                 var sql = "SELECT offline_song,songTitle from nrgyn_daily_songs where day =" + (n + 1);
                 transaction.executeSql(sql, []
                         , function (tx, results) {
-                            console.log("day row" + results.rows);
-                            console.log(results.rows);
+                            $scope.mylog("day row" + results.rows);
+                            $scope.mylog(results.rows);
                             $scope.PlaySong = "mp3/" + results.rows.item(0).offline_song;
                             $scope.SongName = results.rows.item(0).songTitle;
 
@@ -824,10 +829,10 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                             // document.getElementById('player').src = $scope.PlaySong;
                             //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
-                            console.log(results.rows.item(0).offline_song);
+                            $scope.mylog(results.rows.item(0).offline_song);
                         }
                 , function (error) {
-                    console.log(error);
+                    $scope.mylog(error);
                 });
             });
         }
@@ -840,7 +845,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
         {
             db.transaction(function (transaction) {
                 transaction.executeSql("SELECT offline_bg_img FROM nrgyn_main_cat", [], function (tx, results) {
-                    console.log(results.rows.item);
+                    $scope.mylog(results.rows.item);
                     var len = results.rows.length, i;
                     //$("#rowCount").append(len);
                     for (i = 0; i < len; i++) {
@@ -866,7 +871,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
         {
 
 
-            console.log("db not access");
+            $scope.mylog("db not access");
         }
     };
 
@@ -904,7 +909,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
             var fileTransfer = new FileTransfer();
             fileTransfer.download(url, imagePath, function (entry) {
                 //$scope.downloading +="<br> Downloading..."+url;
-                console.log(entry.fullPath); // entry is fileEntry object
+                $scope.mylog(entry.fullPath); // entry is fileEntry object
                 // $scope.message = entry.fullPath;
 
                 // alert($scope.message);
@@ -913,11 +918,11 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
             }, function (error) {
                 $scope.downloading += "error..." + error.code;
                 // $scope.message = "error file downloading";
-                console.log("download error source " + error.source);
-                console.log("download error target " + error.target);
-                console.log("upload error code: " + error.code);
+                $scope.mylog("download error source " + error.source);
+                $scope.mylog("download error target " + error.target);
+                $scope.mylog("upload error code: " + error.code);
                 $scope.message = error.target;
-                console.log(error);
+                $scope.mylog(error);
             });
         }, function (error) {
             $scope.message = "Erro file handlong.." + error.code;
@@ -1007,22 +1012,22 @@ app.initialize();
 //
 //        if (i < queries.length - 1) {
 //
-//            console.log(i + " of " + queries.length);
+//            $scope.mylog(i + " of " + queries.length);
 //            if (!queries[i + 1].match(/(INSERT|CREATE|DROP|PRAGMA|BEGIN|COMMIT)/)) {
 //                queries[i + 1] = queries[i] + ";\n" + queries[i + 1];
 //                return $scope.processQuery(db, i + 1, queries, dbname);
 //            }
-//            console.log("------------>", queries[i]);
+//            $scope.mylog("------------>", queries[i]);
 //            db.transaction(function (query) {
 //                query.executeSql(queries[i] + ";", [], function (tx, result) {
 //                    $scope.processQuery(db, i + 1, queries, dbname);
 //                });
 //            }, function (err) {
-//                console.log("Query error in ", queries[i], err.message);
+//                $scope.mylog("Query error in ", queries[i], err.message);
 //                $scope.processQuery(db, i + 1, queries, dbname);
 //            });
 //        } else {
-//            console.log("Done importing!");
+//            $scope.mylog("Done importing!");
 //        }
 //
 //    };
