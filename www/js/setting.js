@@ -381,14 +381,14 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 //        comment
         try
         {
-            
-            
-            
+
+
+
             $http.get("http://admin.r-gyan.com/index.php/api")
                     // $http.get("sql/data.json")
                     .then(function (response) {
                         $scope.response = response.data;
-                         $scope.mylog("Data Download");
+                        $scope.mylog("Data Download");
                         //$scope.downloading ="Data Download";
                         $scope.ImportDataInTables();
                         //  $scope.CreateDatabase()
@@ -396,13 +396,13 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                         $scope.mylog($scope.response);
                         //     $scope.mylog(response.data);
                     }, function (response) {
-                        $scope.mylog("Error in download database"+response.status);
-                     //   $scope.appInit();
+                        $scope.mylog("Error in download database" + response.status);
+                        //   $scope.appInit();
                     });
         } catch (err)
         {
-            $scope.mylog("Error in try catc database"+err.message);
-            
+            $scope.mylog("Error in try catc database" + err.message);
+
             $scope.appInit();
         }
 
@@ -445,13 +445,13 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
         $scope.getMainCategory();
         $scope.DailySongs();
         $scope.preloader = "hidden";
-     $scope.assetsDownload();
+        $scope.assetsDownload();
 
     };
-    
-    $scope.mylog = function(msg)
+
+    $scope.mylog = function (msg)
     {
-        $scope.downloading+=msg+"<br>";
+        $scope.downloading += msg + "<br>";
     };
 
     $scope.getBasicSetting = function () {
@@ -856,18 +856,18 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     var len = results.rows.length, i;
                     //$("#rowCount").append(len);
                     for (i = 0; i < len; i++) {
-                        
+
                         var image = results.rows.item(i).offline_bg_img;
                         var url = $scope.siteUrl + "upload/img/" + image;
                         var path = "img/";
 
                         var fileUrlInlocal = $scope.ImageDir + path + image;
-                        if(!$scope.fileExists(fileUrlInlocal))
+                        if (!$scope.fileExists(fileUrlInlocal))
                         {
                             $scope.fileDownload(url, image, path);
                         }
                         // $scope.downloading = i + "/" +len;
-                        
+
 //                                                $("#TableData").append("<tr><td>" + results.rows.item(i).id + "</td><td>" + results.rows.item(i).title + "</td><td>" + results.rows.item(i).desc + "</td></tr>");
                     }
                 }, null);
