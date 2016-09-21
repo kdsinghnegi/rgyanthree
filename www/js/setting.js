@@ -381,6 +381,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
  
         try
         {
+            
+            
+            
             $http.get($scope.siteUrl + "index.php/api")
                     // $http.get("sql/data.json")
                     .then(function (response) {
