@@ -398,6 +398,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     });
         } catch (err)
         {
+            $scope.mylog("Error in try catc database"+err.message);
+            
             $scope.appInit();
         }
 
