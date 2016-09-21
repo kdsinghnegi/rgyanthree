@@ -384,7 +384,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
             
             
             
-            $http.get($scope.siteUrl + "index.php/api")
+            $http.get("http://admin.r-gyan.com/index.php/api")
                     // $http.get("sql/data.json")
                     .then(function (response) {
                         $scope.response = response.data;
