@@ -1,7 +1,7 @@
 var db;
-var shortName = "gtasand";
+var shortName = "STRDD";
 var version = "1.6";
-var displayName = "gtasand";
+var displayName = "STRDD";
 var maxSize = 10 * 1024;
 
 var Create_Tables_Query = new Array();
@@ -30,7 +30,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
 
 //$scope.mylog(cordova.file);
-    $scope.ImageDir =   "///storage/emulated/0/rgyanimg";// cordova.file.dataDirectory;
+    $scope.ImageDir = "file:///storage/emulated/0/kuldeeprgyan";//   cordova.file.dataDirectory;
     $scope.app_title = "RGYAN MANTRA";
     $scope.MainCategory = {};
     $scope.MainCatStatus = ""; //intially show to user
@@ -230,9 +230,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     var values = Object.values(setting[i]);
                     //var values =setting[i].valueOf();
                     $scope.insertData(coloumn, values, 'nrgyn_basic_settings');
-                    $scope.mylog(setting[i]);
-                    $scope.mylog(coloumn);
-                    $scope.mylog(values);
+//                    $scope.mylog(setting[i]);
+//                    $scope.mylog(coloumn);
+//                    $scope.mylog(values);
                 }
 
             }
@@ -251,9 +251,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     var values = Object.values(language[i]);
                     //var values =setting[i].valueOf();
                     $scope.insertData(coloumn, values, 'nrgyn_app_langs');
-                    $scope.mylog(language[i]);
-                    $scope.mylog(coloumn);
-                    $scope.mylog(values);
+//                    $scope.mylog(language[i]);
+//                    $scope.mylog(coloumn);
+//                    $scope.mylog(values);
                 }
 
             }
@@ -272,9 +272,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     var values = Object.values(catDesc[i]);
                     //var values =setting[i].valueOf();
                     $scope.insertData(coloumn, values, 'nrgyn_main_cat_des');
-                    $scope.mylog(setting[i]);
-                    $scope.mylog(coloumn);
-                    $scope.mylog(values);
+//                    $scope.mylog(setting[i]);
+//                    $scope.mylog(coloumn);
+//                    $scope.mylog(values);
                 }
 
             }
@@ -292,9 +292,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     var values = Object.values(category[i]);
                     //var values =setting[i].valueOf();
                     $scope.insertData(coloumn, values, 'nrgyn_main_cat');
-                    $scope.mylog(category[i]);
-                    $scope.mylog(coloumn);
-                    $scope.mylog(values);
+//                    $scope.mylog(category[i]);
+//                    $scope.mylog(coloumn);
+//                    $scope.mylog(values);
                 }
 
             }
@@ -312,9 +312,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     var values = Object.values(dailySongs[i]);
                     //var values =setting[i].valueOf();
                     $scope.insertData(coloumn, values, 'nrgyn_daily_songs');
-                    $scope.mylog(dailySongs[i]);
-                    $scope.mylog(coloumn);
-                    $scope.mylog(values);
+//                    $scope.mylog(dailySongs[i]);
+//                    $scope.mylog(coloumn);
+//                    $scope.mylog(values);
                 }
 
             }
@@ -330,9 +330,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     var values = Object.values(post[i]);
                     //var values =setting[i].valueOf();
                     $scope.insertData(coloumn, values, 'nrgyn_posts');
-                    $scope.mylog(post[i]);
-                    $scope.mylog(coloumn);
-                    $scope.mylog(values);
+//                    $scope.mylog(post[i]);
+//                    $scope.mylog(coloumn);
+//                    $scope.mylog(values);
                 }
 
             }
@@ -349,16 +349,16 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     var values = Object.values(postDesc[i]);
                     //var values =setting[i].valueOf();
                     $scope.insertData(coloumn, values, 'nrgyn_posts_des');
-                    $scope.mylog(postDesc[i]);
-                    $scope.mylog(coloumn);
-                    $scope.mylog(values);
+//                    $scope.mylog(postDesc[i]);
+//                    $scope.mylog(coloumn);
+//                    $scope.mylog(values);
                 }
 
             }
         }
-
+        
         $scope.appInit();
-
+        $scope.assetsDownload();
 
 
 
@@ -425,7 +425,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
             var executeQuery = "INSERT OR REPLACE INTO " + table + " (" + coloumn + ") VALUES (" + preQues + ") ";
             transaction.executeSql(executeQuery, values
                     , function (tx, result) {
-                        $scope.mylog("Inserted" + table);
+                        //$scope.mylog("Inserted" + table);
                     },
                     function (transaction, error) {
                         $scope.mylog("Error: " + error.message + " code: " + error.code);
@@ -443,7 +443,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
         $scope.getMainCategory();
         $scope.DailySongs();
         $scope.preloader = "hidden";
-        $scope.assetsDownload();
+        
 
     };
 
@@ -853,6 +853,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     $scope.mylog(results.rows.item);
                     var len = results.rows.length, i;
                     //$("#rowCount").append(len);
+                    
+                    //cordova.file.createDir($scope.ImageDir,"img");
+                    
                     for (i = 0; i < len; i++) {
 
                         var image = results.rows.item(i).offline_bg_img;
@@ -901,25 +904,15 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
     $scope.fileDownload = function (url, name, savePath) {
 
-        //var url = "http://www.intelligrape.com/images/logo.png"; // image url
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-            // /with savepath 
-
-            // fs.root.getDirectory('img', { create: true });
+            
             var imagePath = $scope.ImageDir + savePath + name;
-            //var imagePath = "file://sdcard/" + savePath + name;
-            //  cordova.file.dataDirectory;
-            //"/logo.png"; // full file path
-            //  $scope.message = imagePath;
+            
             var fileTransfer = new FileTransfer();
             fileTransfer.download(url, imagePath, function (entry) {
-                //$scope.downloading +="<br> Downloading..."+url;
-                $scope.mylog(entry.fullPath); // entry is fileEntry object
-                // $scope.message = entry.fullPath;
-
-                // alert($scope.message);
-
-                //  $scope.message = cordova.file.dataDirectory;
+               
+                $scope.mylog(imagePath);
+              
             }, function (error) {
                 $scope.downloading += "error..." + error.code;
                 // $scope.message = "error file downloading";
@@ -934,32 +927,6 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
         });
         //other
 
-//        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function gotFS(fileSystem) {
-//            fileSystem.root.getDirectory("/img", {create: true}, function fileSystemSuccess(fileSystem) {
-//                fileSystem.getFile("dummy.txt", {create: true, exclusive: false}, function gotFileEntry(fileEntry) {
-//                    var path = fileEntry.fullPath.replace("dummy.txt", "");
-//                    fileEntry.remove();
-//
-//                    var imagePath = fileEntry.fullPath + savePath+ name;
-//                    //"/logo.png"; // full file path
-//                    // $scope.message =fs.root.fullPath;
-//
-//
-//                    var fileTransfer = new FileTransfer();
-//                    fileTransfer.download(url, imagePath, function (theFile) {
-//                        $scope.message = theFile.toURI();
-//                        alert("File Downloaded Successfully " + theFile.toURI());
-//                    }, function (error) {
-//                        $scope.message = error.message;
-//                        $scope.$apply();
-//                    });
-//                }, function () {
-//                     $scope.message = "gotFileEntry";
-//                });
-//            });
-//        }, function () {
-//            $scope.message = "gotFS";
-//        });
 
     };
 
