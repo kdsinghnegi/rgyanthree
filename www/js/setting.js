@@ -30,7 +30,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
 
 //$scope.mylog(cordova.file);
-    $scope.ImageDir = "file:///storage/emulated/0/kuldeeprgyan";//   cordova.file.dataDirectory;
+//"file:///storage/emulated/0/kuldeeprgyan/";
+    $scope.ImageDir = cordova.file.dataDirectory+"kuldeeprgyan/";//   cordova.file.dataDirectory;
     $scope.app_title = "RGYAN MANTRA";
     $scope.MainCategory = {};
     $scope.MainCatStatus = ""; //intially show to user
@@ -365,7 +366,12 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
     };
 
-
+    $scope.urlEncode = function(image){
+        
+        
+        return $scope.ImageDir+"img/"+image;
+        
+    };
     $scope.ChangeLanguage = function (id)
     {
         $scope.curr_lang_id = id;

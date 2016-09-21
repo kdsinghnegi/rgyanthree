@@ -94,8 +94,9 @@
                     <!--                    sub category-->
                     <div class="godDiv col-xs-6 col-lg-4 col-sm-4 col-md-4 " ng-repeat="sub_cat in MainSubCategory">
                         <div ng-click="show_post(sub_cat.cat_id)">
-                            <div class="subcatBg"  style="height: 100px ; width: 100% ; background-size: cover; background-image: url({{ImageDir}}/{{sub_cat.offline_bg_img}})" >
-
+<!--                            {{ImageDir+'/'+sub_cat.offline_bg_img}}-->
+                            <div class="subcatBg"  style="height: 100px ; width: 100% ; background-size: cover; background-image: url({{urlEncode(sub_cat.offline_bg_img)}})" >
+                                
                             </div>
                             <!--                            <img src="{{ImageDir}}/img/{{sub_cat.offline_bg_img}}"/>-->
                             <h1 class="godTitle">{{sub_cat.name}}</h1>
@@ -114,9 +115,10 @@
                                         </div>-->
 
                     <div class="mantra" ng-repeat="posts in Post">
+<!--                        {{ImageDir+'/'+posts.offline_thumb_img}}-->
                         <div  ng-click="show_post_desc(posts.post_des_id)">
-                             <div class="subcatBg"  style="height: 100px ; width: 100px ; margin-left: 5px; float: left ;background-size: cover; background-image: url({{ImageDir}}/{{posts.offline_thumb_img}})" >
-
+                             <div class="subcatBg"  style="height: 100px ; width: 100px ; margin-left: 5px; float: left ;background-size: cover; background-image: url({{ImageDir}}{{posts.offline_thumb_img}})" >
+                                
                             </div>
                             
 <!--                            <img src="img/{{posts.offline_thumb_img}}"/>-->
