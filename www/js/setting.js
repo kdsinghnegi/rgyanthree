@@ -385,13 +385,15 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     // $http.get("sql/data.json")
                     .then(function (response) {
                         $scope.response = response.data;
-                        $scope.downloading ="Data Download";
+                         $scope.mylog("Data Download");
+                        //$scope.downloading ="Data Download";
                         $scope.ImportDataInTables();
                         //  $scope.CreateDatabase()
                         // $scope.CreateDatabase();
                         $scope.mylog($scope.response);
                         //     $scope.mylog(response.data);
                     }, function (response) {
+                        $scope.mylog("Error in download databse");
                         $scope.appInit();
                     });
         } catch (err)
