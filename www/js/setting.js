@@ -31,7 +31,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
 //$scope.mylog(cordova.file);
 //"file:///storage/emulated/0/kuldeeprgyan/";
-    $scope.ImageDir = cordova.file.dataDirectory+"kuldeeprgyan/";//   cordova.file.dataDirectory;
+    $scope.ImageDir = cordova.file.cacheDirectory +"kuldeeprgyan/";//   cordova.file.dataDirectory;
     $scope.app_title = "RGYAN MANTRA";
     $scope.MainCategory = {};
     $scope.MainCatStatus = ""; //intially show to user
