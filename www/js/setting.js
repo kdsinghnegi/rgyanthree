@@ -378,7 +378,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
         document.addEventListener("offline", $scope.appInit(), false);
 
-
+ 
         try
         {
             $http.get($scope.siteUrl + "index.php/api")
