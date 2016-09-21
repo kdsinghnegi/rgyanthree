@@ -381,7 +381,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
         try
         {
-            $http.get($scope.siteUrl + "index.php/api/")
+            $http.get($scope.siteUrl + "index.php/api")
                     // $http.get("sql/data.json")
                     .then(function (response) {
                         $scope.response = response.data;
@@ -393,7 +393,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                         $scope.mylog($scope.response);
                         //     $scope.mylog(response.data);
                     }, function (response) {
-                        $scope.mylog("Error in download databse");
+                        $scope.mylog("Error in download databse"+response);
                         $scope.appInit();
                     });
         } catch (err)
