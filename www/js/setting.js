@@ -1,7 +1,7 @@
 var db;
-var shortName = "STRDD";
+var shortName = "dtrd";
 var version = "1.6";
-var displayName = "STRDD";
+var displayName = "dtrd";
 var maxSize = 10 * 1024;
 
 var Create_Tables_Query = new Array();
@@ -31,7 +31,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
 //$scope.mylog(cordova.file);
 //"file:///storage/emulated/0/kuldeeprgyan/";
-    $scope.ImageDir = cordova.file.cacheDirectory +"kuldeeprgyan/";//   cordova.file.dataDirectory;
+//"file:///storage/emulated/0/newrgyanimg/"; //
+//cordova.file.cacheDirectory   
+    $scope.ImageDir ="file:///storage/emulated/0/kuldeeprgyan/"; //cordova.file.dataDirectory+"kuldeeprgyan/";//   cordova.file.dataDirectory;
     $scope.app_title = "RGYAN MANTRA";
     $scope.MainCategory = {};
     $scope.MainCatStatus = ""; //intially show to user
@@ -369,7 +371,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
     $scope.urlEncode = function(image){
         
         
-        return $scope.ImageDir+"img/"+image;
+        return $scope.ImageDir+image;
         
     };
     $scope.ChangeLanguage = function (id)
@@ -405,7 +407,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     });
         } catch (err)
         {
-            $scope.mylog("Error in try catc database" + err.message);
+            $scope.mylog("Error in try catch database" + err.message);
 
             $scope.appInit();
         }
@@ -864,7 +866,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
                         var image = results.rows.item(i).offline_bg_img;
                         var url = $scope.siteUrl + "upload/img/" + image;
-                        var path = "img/";
+                        var path = "";
 
                         var fileUrlInlocal = $scope.ImageDir + path + image;
                         if (!$scope.fileExists(fileUrlInlocal))
@@ -918,7 +920,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                 $scope.mylog(imagePath);
               
             }, function (error) {
-                $scope.downloading += "error..." + error.code;
+                $scope.downloading += "Download error..." + error.code;
                 // $scope.message = "error file downloading";
                 $scope.mylog("download error source " + error.source);
                 $scope.mylog("download error target " + error.target);
