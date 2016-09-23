@@ -82,7 +82,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
         if (typeof song !== "undefined" && song !== 0 && song !== null)
         {
             $scope.soundStatus = "fa-volume-up";
-            $scope.PlaySong = "mp3/" + song;
+            $scope.PlaySong = $scope.ImageDir + song;
             $scope.SongName = "Palying...";
             $scope.AudioPlayer.muted = false;
 
