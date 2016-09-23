@@ -854,6 +854,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
     {
         if (db)
         {
+            //download sub category and main images
             db.transaction(function (transaction) {
                 transaction.executeSql("SELECT offline_bg_img FROM nrgyn_main_cat", [], function (tx, results) {
                     $scope.mylog(results.rows.item);
@@ -879,6 +880,70 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     }
                 }, null);
             });
+            
+            //end
+            
+            
+            //download images for post
+            
+            db.transaction(function (transaction) {
+                transaction.executeSql("SELECT online_thumb_img FROM nrgyn_posts", [], function (tx, results) {
+                    $scope.mylog(results.rows.item);
+                    var len = results.rows.length, i;
+                    //$("#rowCount").append(len);
+                    
+                    //cordova.file.createDir($scope.ImageDir,"img");
+                    
+                    for (i = 0; i < len; i++) {
+
+                        var image = results.rows.item(i).online_thumb_img;
+                        var url = $scope.siteUrl + "upload/img/" + image;
+                        var path = "";
+
+                        var fileUrlInlocal = $scope.ImageDir + path + image;
+                        if (!$scope.fileExists(fileUrlInlocal))
+                        {
+                            $scope.fileDownload(url, image, path);
+                        }
+                        // $scope.downloading = i + "/" +len;
+
+//                                                $("#TableData").append("<tr><td>" + results.rows.item(i).id + "</td><td>" + results.rows.item(i).title + "</td><td>" + results.rows.item(i).desc + "</td></tr>");
+                    }
+                }, null);
+            });
+             //end code
+            
+            
+            //download songs
+            
+             db.transaction(function (transaction) {
+                transaction.executeSql("SELECT offline_song FROM nrgyn_posts", [], function (tx, results) {
+                    $scope.mylog(results.rows.item);
+                    var len = results.rows.length, i;
+                    //$("#rowCount").append(len);
+                    
+                    //cordova.file.createDir($scope.ImageDir,"img");
+                    
+                    for (i = 0; i < len; i++) {
+
+                        var song = results.rows.item(i).offline_song;
+                        var url = $scope.siteUrl + "upload/mp3/" + song;
+                        var path = "";
+
+                        var fileUrlInlocal = $scope.ImageDir + path + song;
+                        if (!$scope.fileExists(fileUrlInlocal))
+                        {
+                            $scope.fileDownload(url, song, path);
+                        }
+                        // $scope.downloading = i + "/" +len;
+
+//                                                $("#TableData").append("<tr><td>" + results.rows.item(i).id + "</td><td>" + results.rows.item(i).title + "</td><td>" + results.rows.item(i).desc + "</td></tr>");
+                    }
+                }, null);
+            });
+            
+            //emd
+            
 
         }
         else
