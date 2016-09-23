@@ -927,7 +927,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     for (i = 0; i < len; i++) {
 
                         var song = results.rows.item(i).offline_song;
-                        var url = $scope.siteUrl + "upload/mp3/" + song;
+                        var url = $scope.siteUrl + "upload/img/" + song;
                         var path = "";
 
                         var fileUrlInlocal = $scope.ImageDir + path + song;
