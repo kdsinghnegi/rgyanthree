@@ -81,7 +81,7 @@
                     <ul class="main_category">
                         <!--                        {{MainCategory}}-->
                         <li ng-repeat="cat in MainCategory" >
-                            <h1 ng-click="show_sub_category(cat.cat_id)"  style="background-image: url(img/{{cat.offline_bg_img}})">{{cat.name}}</h1> 
+                            <h1 ng-click="show_sub_category(cat.cat_id)"  style="background-image: url({{image_exist(cat.offline_bg_img)}})">{{cat.name}}</h1> 
                             <!--                            <h1 style=" background-image: url('img/image-2.png');">Mantra</h1> 
                                                         <h1 style=" background-image: url('img/image-3.png');">Varat</h1> 
                                                         <h1 style=" background-image: url('img/image-4.png');">Vandana</h1> -->

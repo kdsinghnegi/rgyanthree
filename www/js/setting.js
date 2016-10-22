@@ -33,7 +33,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 //"file:///storage/emulated/0/kuldeeprgyan/";
 //"file:///storage/emulated/0/newrgyanimg/"; //
 //cordova.file.cacheDirectory   
-    $scope.ImageDir ="file:///storage/emulated/0/kuldeeprgyan/"; //cordova.file.dataDirectory+"kuldeeprgyan/";//   cordova.file.dataDirectory;
+    $scope.ImageDir = "file:///storage/emulated/0/kuldeeprgyan/"; //cordova.file.dataDirectory+"kuldeeprgyan/";//   cordova.file.dataDirectory;
     $scope.app_title = "RGYAN MANTRA";
     $scope.MainCategory = {};
     $scope.MainCatStatus = ""; //intially show to user
@@ -67,6 +67,29 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
 
     };
+
+    $scope.image_exist = function (Image)
+    {
+        if (Image !== '')
+        {
+            var file_url = 'img/'+Image;
+
+            if (!$scope.fileExists(file_url))
+            {
+                return  $scope.ImageDir + Image;
+            }
+            else
+            {
+                return file_url;
+            }
+        }
+        
+        return '';
+    };
+
+
+
+
 
     $scope.checkSong = function (song)
     {
@@ -359,7 +382,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
             }
         }
-        
+
         $scope.appInit();
         $scope.assetsDownload();
 
@@ -368,11 +391,11 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
     };
 
-    $scope.urlEncode = function(image){
-        
-        
-        return $scope.ImageDir+image;
-        
+    $scope.urlEncode = function (image) {
+
+
+        return $scope.ImageDir + image;
+
     };
     $scope.ChangeLanguage = function (id)
     {
@@ -449,7 +472,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
         $scope.getMainCategory();
         $scope.DailySongs();
         $scope.preloader = "hidden";
-        
+
 
     };
 
@@ -850,6 +873,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
     };
 
+
+
+
     $scope.assetsDownload = function ()
     {
         if (db)
@@ -860,9 +886,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     $scope.mylog(results.rows.item);
                     var len = results.rows.length, i;
                     //$("#rowCount").append(len);
-                    
+
                     //cordova.file.createDir($scope.ImageDir,"img");
-                    
+
                     for (i = 0; i < len; i++) {
 
                         var image = results.rows.item(i).offline_bg_img;
@@ -880,20 +906,20 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     }
                 }, null);
             });
-            
+
             //end
-            
-            
+
+
             //download images for post
-            
+
             db.transaction(function (transaction) {
                 transaction.executeSql("SELECT online_thumb_img FROM nrgyn_posts", [], function (tx, results) {
                     $scope.mylog(results.rows.item);
                     var len = results.rows.length, i;
                     //$("#rowCount").append(len);
-                    
+
                     //cordova.file.createDir($scope.ImageDir,"img");
-                    
+
                     for (i = 0; i < len; i++) {
 
                         var image = results.rows.item(i).online_thumb_img;
@@ -911,19 +937,19 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     }
                 }, null);
             });
-             //end code
-            
-            
+            //end code
+
+
             //download songs
-            
-             db.transaction(function (transaction) {
+
+            db.transaction(function (transaction) {
                 transaction.executeSql("SELECT offline_song FROM nrgyn_posts", [], function (tx, results) {
                     $scope.mylog(results.rows.item);
                     var len = results.rows.length, i;
                     //$("#rowCount").append(len);
-                    
+
                     //cordova.file.createDir($scope.ImageDir,"img");
-                    
+
                     for (i = 0; i < len; i++) {
 
                         var song = results.rows.item(i).offline_song;
@@ -941,9 +967,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                     }
                 }, null);
             });
-            
+
             //emd
-            
+
 
         }
         else
@@ -976,14 +1002,14 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
     $scope.fileDownload = function (url, name, savePath) {
 
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-            
+
             var imagePath = $scope.ImageDir + savePath + name;
-            
+
             var fileTransfer = new FileTransfer();
             fileTransfer.download(url, imagePath, function (entry) {
-               
+
                 $scope.mylog(imagePath);
-              
+
             }, function (error) {
                 $scope.downloading += "Download error..." + error.code;
                 // $scope.message = "error file downloading";
