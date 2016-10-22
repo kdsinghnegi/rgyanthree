@@ -55,7 +55,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
     $scope.PostDesc = {};
     $scope.PostDescStatus = "hidden";
-    $scope.siteUrl = "http://admin.r-gyan.com/";
+    $scope.siteUrl = "http://rgyan.nexgi.com/";
 
 
     $scope.backScreenid = 0; // increment upt0 4;
