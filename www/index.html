@@ -43,6 +43,29 @@
 
         <!--      <link href="./css/navbar-fixed-top.css" rel="stylesheet">-->
     </head>
+
+    <script>
+
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        function onDeviceReady() {
+            document.addEventListener("backbutton", onBackKeyDown, false); //Listen to the User clicking on the back button
+        }
+
+        function onBackKeyDown(e) {
+            e.preventDefault();
+            navigator.notification.confirm("Are you sure you want to exit ?", onConfirm, "Confirmation", "Yes,No");
+            // Prompt the user with the choice
+        }
+
+        function onConfirm(button) {
+            if (button == 2) {//If User selected No, then we just do nothing
+                return;
+            } else {
+                navigator.app.exitApp();// Otherwise we quit the app.
+            }
+        }
+    </script>
     <body ng-app="rgyan"  class="container-fluid" >
         <div class="app row " ng-controller="rgyanCotrl" >
 
@@ -71,10 +94,10 @@
                 <div class="preloader {{preloader}}">
                     <i style=" margin: 45% auto;" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>  
-<!--                <div ng-bind-html="reder_html(downloading)">
-                    
-                </div>-->
-<!--                {{downloading}}-->
+                <!--                <div ng-bind-html="reder_html(downloading)">
+                                    
+                                </div>-->
+                <!--                {{downloading}}-->
 
                 <div class=" {{MainCatStatus}}">
 
@@ -94,9 +117,9 @@
                     <!--                    sub category-->
                     <div class="godDiv col-xs-6 col-lg-4 col-sm-4 col-md-4 " ng-repeat="sub_cat in MainSubCategory">
                         <div ng-click="show_post(sub_cat.cat_id)">
-<!--                            {{ImageDir+'/'+sub_cat.offline_bg_img}}-->
+                            <!--                            {{ImageDir+'/'+sub_cat.offline_bg_img}}-->
                             <div class="subcatBg"  style="height: 100px ; width: 100% ; background-size: cover; background-image: url({{urlEncode(sub_cat.offline_bg_img)}})" >
-                                
+
                             </div>
                             <!--                            <img src="{{ImageDir}}/img/{{sub_cat.offline_bg_img}}"/>-->
                             <h1 class="godTitle">{{sub_cat.name}}</h1>
@@ -115,16 +138,16 @@
                                         </div>-->
 
                     <div class="mantra" ng-repeat="posts in Post">
-<!--                        {{ImageDir+'/'+posts.offline_thumb_img}}-->
+                        <!--                        {{ImageDir+'/'+posts.offline_thumb_img}}-->
                         <div  ng-click="show_post_desc(posts.post_des_id)">
-                             <div class="subcatBg"  style="height: 100px ; width: 100px ; margin-left: 5px; float: left ;background-size: cover; background-image: url({{urlEncode(posts.offline_thumb_img)}})" >
-                                
+                            <div class="subcatBg"  style="height: 100px ; width: 100px ; margin-left: 5px; float: left ;background-size: cover; background-image: url({{urlEncode(posts.offline_thumb_img)}})" >
+
                             </div>
-                            
-<!--                            <img src="img/{{posts.offline_thumb_img}}"/>-->
+
+                            <!--                            <img src="img/{{posts.offline_thumb_img}}"/>-->
                             <h1 class='postTitle'>{{posts.post_title}}</h1>
                             <p class="postDescibe" ng-bind-html="reder_html(posts.post_desc)">
-<!--                                {{posts.post_desc}}-->
+                                <!--                                {{posts.post_desc}}-->
                             </p>
 
                             <span class="readMore">Read More</span> <span ng-if="checkSong(post.offline_song)" class="fa fa-play-circle "></span>
@@ -147,7 +170,7 @@
                             {{post.post_title}}
                         </h1>
                         <p ng-bind-html="reder_html(post.post_desc)">
-<!--                            {{post.post_desc}}-->
+                            <!--                            {{post.post_desc}}-->
 
                         </p>
 
@@ -155,13 +178,13 @@
 
 
                     </div>
-<!--samdy-->
+                    <!--samdy-->
                 </div>
 
 
             </div>
-<!--            <h2>gdg</h2>-->
-<!--            <button class="btn btn-lg btn-success" ng-click="assetsDownload()">{{downloading}}</button>-->
+            <!--            <h2>gdg</h2>-->
+            <!--            <button class="btn btn-lg btn-success" ng-click="assetsDownload()">{{downloading}}</button>-->
 
             <div class="audioPlayer">
                 <h1 class="DayName">{{Day}}</h1>

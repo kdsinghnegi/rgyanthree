@@ -44,7 +44,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
 
     $scope.Day = "SUNDAY";
-    $scope.SongName = "Hanuman Chalisa";
+    $scope.SongName = "Song";
 
     $scope.AudioPlayer = document.getElementById("AudioPlayer");
 
@@ -413,7 +413,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
         try
         {
 
-            $http.get("http://admin.r-gyan.com/index.php/api")
+            $http.get("http://rgyan.nexgi.com/index.php/api")
                     // $http.get("sql/data.json")
                     .then(function (response) {
                         $scope.response = response.data;

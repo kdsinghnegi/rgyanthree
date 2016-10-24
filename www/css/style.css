@@ -173,6 +173,25 @@ div.navigator ul li.language
     margin: 11px auto;
     padding: 0px 7px;
     line-height: 1;
+/*    position: relative;*/
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    vertical-align: middle;
+    z-index: 1;
+    will-change: opacity, transform;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+
+
 }
 
 div.navigator ul li.language span
@@ -234,7 +253,7 @@ span.songIcon
 div.mantra  h1.postTitle
 {
     margin: 3px;
-/*    float: left;*/
+    /*    float: left;*/
 }
 span.readMore
 {
@@ -285,12 +304,12 @@ div.audioPlayer div.songDetails span
 }
 div.audioPlayer div.songDetails span.currentPlaytitle
 {
-   font-weight: bold;
-   font-style: italic;
+    font-weight: bold;
+    font-style: italic;
 }
 div.audioPlayer div.Sound
 {
-    
+
 }
 div.audioPlayer div.Sound span
 {
@@ -299,7 +318,7 @@ div.audioPlayer div.Sound span
 }
 div.preloader
 {
-        position: absolute;
+    position: absolute;
     top: 44px;
     bottom: 0;
     right: 0;
@@ -310,7 +329,7 @@ div.preloader
 }
 div.subcatImg
 {
-    
+
 }
 
 h1.MantraTitleCustom
@@ -323,5 +342,5 @@ h1.MantraTitleCustom
 p.postDescibe
 {
     text-align: left !important;
-/*    float: left;*/
+    /*    float: left;*/
 }
