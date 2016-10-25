@@ -631,7 +631,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
         {
             db.transaction(function (transaction) {
 
-                var sql = "SELECT p.post_id,p.online_thumb_img,pd.post_title,pd.post_desc,pd.post_des_id from nrgyn_posts as p left join nrgyn_posts_des as pd on p.post_id =pd.post_id  where p.cat_id =" + cat_id + " and p.status=1 and pd.lang_id = " + $scope.curr_lang_id;
+                var sql = "SELECT p.post_id,p.online_thumb_img,p.offline_song,pd.post_title,pd.post_desc,pd.post_des_id from nrgyn_posts as p left join nrgyn_posts_des as pd on p.post_id =pd.post_id  where p.cat_id =" + cat_id + " and p.status=1 and pd.lang_id = " + $scope.curr_lang_id;
                 transaction.executeSql(sql, []
                         , function (tx, results) {
                             $scope.mylog(results.rows);
@@ -646,7 +646,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                                     offline_thumb_img: results.rows.item(i).online_thumb_img,
                                     post_title: results.rows.item(i).post_title,
                                     post_desc: results.rows.item(i).post_desc.substring(1, 40),
-                                    post_des_id: results.rows.item(i).post_des_id
+                                    post_des_id: results.rows.item(i).post_des_id,
+                                    offline_song :results.rows.item(i).offline_song
                                 };
 
 
