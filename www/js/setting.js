@@ -510,7 +510,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
         if (db)
         {
             db.transaction(function (transaction) {
-                var sql = "SELECT mc.cat_id,mc.offline_bg_img,mcd.name from nrgyn_main_cat as mc left join nrgyn_main_cat_des as mcd on mc.cat_id =mcd.cat_id  where mc.parent_cat_id = " + parent_id + " and mcd.status=1 and mcd.lang_id = " + $scope.curr_lang_id;
+                var sql = "SELECT mc.cat_id,mc.offline_bg_img,mcd.name from nrgyn_main_cat as mc left join nrgyn_main_cat_des as mcd on mc.cat_id =mcd.cat_id  where mc.parent_cat_id = " + parent_id + " and mc.status=1 and mcd.lang_id = " + $scope.curr_lang_id;
                 transaction.executeSql(sql, []
                         , function (tx, results) {
                             $scope.mylog(results.rows);
@@ -575,7 +575,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
         if (db)
         {
             db.transaction(function (transaction) {
-                var sql = "SELECT mc.cat_id,mc.offline_bg_img,mcd.name from nrgyn_main_cat as mc left join nrgyn_main_cat_des as mcd on mc.cat_id =mcd.cat_id  where mc.parent_cat_id =" + parent_id + " and mcd.status=1 and mcd.lang_id = " + $scope.curr_lang_id;
+                var sql = "SELECT mc.cat_id,mc.offline_bg_img,mcd.name from nrgyn_main_cat as mc left join nrgyn_main_cat_des as mcd on mc.cat_id =mcd.cat_id  where mc.parent_cat_id =" + parent_id + " and mc.status=1 and mcd.lang_id = " + $scope.curr_lang_id;
                 transaction.executeSql(sql, []
                         , function (tx, results) {
                             $scope.mylog(results.rows);

@@ -165,7 +165,14 @@ div.navigator ul li.appName h1
     color: #3bcde6;
     font-weight: bold;
 }
-
+div.navigator ul li.language:active span
+{
+        color: #3bcde6;
+}
+div.navigator ul li.back_home:active span
+{
+     color: #3bcde6;
+}
 div.navigator ul li.language
 {
     float: right;

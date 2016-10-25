@@ -74,7 +74,7 @@
                 <!--            <img ng-src="{{message}}"/>-->
                 <div class="navigator col-lg-12 col-sm-12 col-xs-12 ">
                     <ul class="col-lg-12 col-sm-12 col-xs-12">
-                        <li ng-click="backScreen()">
+                        <li class="back_home" ng-click="backScreen()">
                             <span class="fa {{homeIcon}}"></span>   
                         </li>
                         <li class="language languageBorder" ng-click="ChangeLanguage(1)">
@@ -150,7 +150,7 @@
                                 <!--                                {{posts.post_desc}}-->
                             </p>
 
-                            <span class="readMore">Read More</span> <span ng-if="checkSong(post.offline_song)" class="fa fa-play-circle "></span>
+                            <span class="readMore">Read More</span> <span ng-if="checkSong(posts.offline_song)" class="fa fa-play-circle "></span>
                         </div>
                     </div>
 
