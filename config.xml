@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.nexgeninnovators.rgyan_god_aritapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.nexgeninnovators.rgodgyanapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Rgyan App Mantra  </name>
     <description>This app contains all god artis,chalisha and mantras .You can listen artis,mantras and chalisa at any time.It's interface is simple and easy to handle.</description>
     <author email="support@phonegap.com" href="http://nexgeninnovators.com">Nexgen Team</author>
