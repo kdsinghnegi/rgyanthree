@@ -9,9 +9,9 @@ Create_Tables_Query[0] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_basic_settings" ("
 Create_Tables_Query[1] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_app_langs" ("lang_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "lang_code" VARCHAR, "lang_title" VARCHAR, "status" INTEGER);';
 Create_Tables_Query[2] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_daily_songs" ("daily_song_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ,"songTitle" VARCHAR, "offline_song" VARCHAR, "online_song" VARCHAR, "day" INTEGER, "status" INTEGER, "sort" INTEGER, "Add_User" INTEGER, "Mode_User" INTEGER, "Add_DateTime" DATETIME,"Mode_DateTime" DATETIME);';
 Create_Tables_Query[3] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_main_cat" ("cat_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "parent_cat_id" INTEGER DEFAULT 0, "sort" INTEGER DEFAULT 99, "status" INTEGER DEFAULT 1, "online_bg_img" TEXT, "offline_bg_img" TEXT, "Add_User" INTEGER, "Mode_User" INTEGER, "Add_DateTime" DATETIME, "Mode_DateTime" DATETIME);';
-Create_Tables_Query[4] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_main_cat_des" ("cat_des_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "cat_id" INTEGER, "lang_id" INTEGER, "name" VARCHAR, "status" INTEGER DEFAULT 1);';
+Create_Tables_Query[4] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_main_cat_des" ("cat_des_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "cat_id" INTEGER, "lang_id" INTEGER, "name" VARCHAR);';
 Create_Tables_Query[5] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_posts" ("post_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "cat_id" INTEGER, "offline_thumb_img" TEXT, "online_thumb_img" TEXT, "offline_song" TEXT, "online_song" TEXT, "status" INTEGER DEFAULT 1, "sort" INTEGER DEFAULT 99, "Add_User" INTEGER, "Mode_User" INTEGER, "Add_DateTime" DATETIME, "Mode_DateTime" DATETIME);';
-Create_Tables_Query[6] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_posts_des" ("post_des_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "post_id" INTEGER, "lang_id" INTEGER, "post_title" TEXT, "post_desc" TEXT, "status" INTEGER DEFAULT 1);';
+Create_Tables_Query[6] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_posts_des" ("post_des_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "post_id" INTEGER, "lang_id" INTEGER, "post_title" TEXT, "post_desc" TEXT);';
 
 var ang_app = angular.module("rgyan", []);
 ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
