@@ -14,7 +14,7 @@ Create_Tables_Query[5] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_posts" ("post_id" 
 Create_Tables_Query[6] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_posts_des" ("post_des_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "post_id" INTEGER, "lang_id" INTEGER, "post_title" TEXT, "post_desc" TEXT, "status" INTEGER DEFAULT 1);';
 
 var ang_app = angular.module("rgyan", []);
-ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
+ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
 
@@ -72,7 +72,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
     {
         if (Image !== '')
         {
-            var file_url = 'img/'+Image;
+            var file_url = 'img/' + Image;
 
             if (!$scope.fileExists(file_url))
             {
@@ -83,7 +83,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                 return file_url;
             }
         }
-        
+
         return '';
     };
 
@@ -216,14 +216,19 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                             function (tx, result) {
                                 $scope.mylog(query);
                                 $scope.mylog("Table " + i + " created successfully");
-                                i = i + 1;
-                                $scope.CreateTables(i);
+
                             },
                             function (tc, error) {
                                 $scope.mylog("Error occurred while creating the table." + error.message);
                             });
                 });
+
+                i = i + 1;
+                $scope.CreateTables(i);
+
             }
+
+
 
             if (i == Create_Tables_Query.length)
             {
@@ -243,144 +248,172 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
     $scope.ImportDataInTables = function () {
 
 
+
+
+
+
         if ($scope.response != null)
         {
-            //data inseting in basic setting tabel
-            if (typeof $scope.response.setting != 'undefined')
-            {
-                var setting = $scope.response.setting;
-                var i = 0;
-                for (i = 0; i < setting.length; i++)
+
+            $timeout(function () {
+                //data inseting in basic setting tabel
+                if (typeof $scope.response.setting != 'undefined')
                 {
-                    var coloumn = Object.keys(setting[i]).toString();
-                    var values = Object.values(setting[i]);
-                    //var values =setting[i].valueOf();
-                    $scope.insertData(coloumn, values, 'nrgyn_basic_settings');
+                    var setting = $scope.response.setting;
+                    var i = 0;
+                    for (i = 0; i < setting.length; i++)
+                    {
+                        var coloumn = Object.keys(setting[i]).toString();
+                        var values = Object.values(setting[i]);
+                        //var values =setting[i].valueOf();
+                        $scope.insertData(coloumn, values, 'nrgyn_basic_settings');
 //                    $scope.mylog(setting[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
+                    }
+
                 }
-
-            }
-
+            }, 500);
 
 
 
-            //data inseting in basic language tabel
-            if (typeof $scope.response.language != 'undefined')
-            {
-                var language = $scope.response.language;
-                i = 0;
-                for (i = 0; i < language.length; i++)
+
+            $timeout(function () {
+                //data inseting in basic language tabel
+                if (typeof $scope.response.language != 'undefined')
                 {
-                    var coloumn = Object.keys(language[i]).toString();
-                    var values = Object.values(language[i]);
-                    //var values =setting[i].valueOf();
-                    $scope.insertData(coloumn, values, 'nrgyn_app_langs');
+                    var language = $scope.response.language;
+                    i = 0;
+                    for (i = 0; i < language.length; i++)
+                    {
+                        var coloumn = Object.keys(language[i]).toString();
+                        var values = Object.values(language[i]);
+                        //var values =setting[i].valueOf();
+                        $scope.insertData(coloumn, values, 'nrgyn_app_langs');
 //                    $scope.mylog(language[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
+                    }
+
                 }
-
-            }
-
+            }, 500);
 
 
 
-            //data inseting in basic catDesc tabel
-            if (typeof $scope.response.catDesc != 'undefined')
-            {
-                var catDesc = $scope.response.catDesc;
-                i = 0;
-                for (i = 0; i < catDesc.length; i++)
+
+            $timeout(function () {
+                //data inseting in basic catDesc tabel
+                if (typeof $scope.response.catDesc != 'undefined')
                 {
-                    var coloumn = Object.keys(catDesc[i]).toString();
-                    var values = Object.values(catDesc[i]);
-                    //var values =setting[i].valueOf();
-                    $scope.insertData(coloumn, values, 'nrgyn_main_cat_des');
+                    var catDesc = $scope.response.catDesc;
+                    i = 0;
+                    for (i = 0; i < catDesc.length; i++)
+                    {
+                        var coloumn = Object.keys(catDesc[i]).toString();
+                        var values = Object.values(catDesc[i]);
+                        //var values =setting[i].valueOf();
+                        $scope.insertData(coloumn, values, 'nrgyn_main_cat_des');
 //                    $scope.mylog(setting[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
+                    }
+
                 }
-
-            }
-
+            }, 500);
 
 
-            //data inseting in basic category tabel
-            if (typeof $scope.response.category != 'undefined')
-            {
-                var category = $scope.response.category;
-                i = 0;
-                for (i = 0; i < category.length; i++)
+
+            $timeout(function () {
+                //data inseting in basic category tabel
+                if (typeof $scope.response.category != 'undefined')
                 {
-                    var coloumn = Object.keys(category[i]).toString();
-                    var values = Object.values(category[i]);
-                    //var values =setting[i].valueOf();
-                    $scope.insertData(coloumn, values, 'nrgyn_main_cat');
+                    var category = $scope.response.category;
+                    i = 0;
+                    for (i = 0; i < category.length; i++)
+                    {
+                        var coloumn = Object.keys(category[i]).toString();
+                        var values = Object.values(category[i]);
+                        //var values =setting[i].valueOf();
+                        $scope.insertData(coloumn, values, 'nrgyn_main_cat');
 //                    $scope.mylog(category[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
+                    }
+
                 }
-
-            }
-
+            }, 500);
 
 
-            //data inseting in basic dailySongs tabel
-            if (typeof $scope.response.dailySongs != 'undefined')
-            {
-                var dailySongs = $scope.response.dailySongs;
-                var i = 0;
-                for (i = 0; i < dailySongs.length; i++)
+
+            $timeout(function () {
+                //data inseting in basic dailySongs tabel
+                if (typeof $scope.response.dailySongs != 'undefined')
                 {
-                    var coloumn = Object.keys(dailySongs[i]).toString();
-                    var values = Object.values(dailySongs[i]);
-                    //var values =setting[i].valueOf();
-                    $scope.insertData(coloumn, values, 'nrgyn_daily_songs');
+                    var dailySongs = $scope.response.dailySongs;
+                    var i = 0;
+                    for (i = 0; i < dailySongs.length; i++)
+                    {
+                        var coloumn = Object.keys(dailySongs[i]).toString();
+                        var values = Object.values(dailySongs[i]);
+                        //var values =setting[i].valueOf();
+                        $scope.insertData(coloumn, values, 'nrgyn_daily_songs');
 //                    $scope.mylog(dailySongs[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
+                    }
+
                 }
+            }, 500);
 
-            }
 
-            //data inseting in basic post tabel
-            if (typeof $scope.response.post != 'undefined')
-            {
-                var post = $scope.response.post;
-                i = 0;
-                for (i = 0; i < post.length; i++)
+
+            $timeout(function () {
+                //data inseting in basic post tabel
+                if (typeof $scope.response.post != 'undefined')
                 {
-                    var coloumn = Object.keys(post[i]).toString();
-                    var values = Object.values(post[i]);
-                    //var values =setting[i].valueOf();
-                    $scope.insertData(coloumn, values, 'nrgyn_posts');
+                    var post = $scope.response.post;
+                    i = 0;
+                    for (i = 0; i < post.length; i++)
+                    {
+                        var coloumn = Object.keys(post[i]).toString();
+                        var values = Object.values(post[i]);
+                        //var values =setting[i].valueOf();
+                        $scope.insertData(coloumn, values, 'nrgyn_posts');
 //                    $scope.mylog(post[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
+                    }
+
                 }
+            }, 500);
 
-            }
 
 
-            //data inseting in basic postDesc tabel
-            if (typeof $scope.response.postDesc != 'undefined')
-            {
-                var postDesc = $scope.response.postDesc;
-                i = 0;
-                for (i = 0; i < postDesc.length; i++)
+            $timeout(function () {
+                //data inseting in basic postDesc tabel
+                $scope.preloader = "";
+                $scope.$apply();
+                if (typeof $scope.response.postDesc != 'undefined')
                 {
-                    var coloumn = Object.keys(postDesc[i]).toString();
-                    var values = Object.values(postDesc[i]);
-                    //var values =setting[i].valueOf();
-                    $scope.insertData(coloumn, values, 'nrgyn_posts_des');
+                    var postDesc = $scope.response.postDesc;
+                    i = 0;
+                    for (i = 0; i < postDesc.length; i++)
+                    {
+                        var coloumn = Object.keys(postDesc[i]).toString();
+                        var values = Object.values(postDesc[i]);
+                        //var values =setting[i].valueOf();
+                        $scope.insertData(coloumn, values, 'nrgyn_posts_des');
 //                    $scope.mylog(postDesc[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
-                }
+                    }
 
-            }
+                    $scope.preloader = "hidden";
+                    $scope.$apply();
+
+                }
+            }, 500);
+
         }
 
         $scope.appInit();
@@ -453,10 +486,12 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
 
         preQues = preQues.toString();
         db.transaction(function (transaction) {
+
             var executeQuery = "INSERT OR REPLACE INTO " + table + " (" + coloumn + ") VALUES (" + preQues + ") ";
             transaction.executeSql(executeQuery, values
                     , function (tx, result) {
                         //$scope.mylog("Inserted" + table);
+
                     },
                     function (transaction, error) {
                         $scope.mylog("Error: " + error.message + " code: " + error.code);
@@ -645,9 +680,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce) {
                                 post[i] = {post_id: results.rows.item(i).post_id,
                                     offline_thumb_img: results.rows.item(i).online_thumb_img,
                                     post_title: results.rows.item(i).post_title,
-                                    post_desc: results.rows.item(i).post_desc.substring(1, 40),
+                                    post_desc: results.rows.item(i).post_desc,
                                     post_des_id: results.rows.item(i).post_des_id,
-                                    offline_song :results.rows.item(i).offline_song
+                                    offline_song: results.rows.item(i).offline_song
                                 };
 
 
