@@ -1020,7 +1020,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     //$("#rowCount").append(len);
 
                     //cordova.file.createDir($scope.ImageDir,"img");
-
+                    downloader.init({folder: $scope.ImageDir});
                     for (i = 0; i < len; i++) {
 
                         var song = results.rows.item(i).offline_song;
@@ -1030,7 +1030,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                         var fileUrlInlocal = $scope.ImageDir + path + song;
                         if (!$scope.fileExists(fileUrlInlocal))
                         {
-                            $scope.fileDownload(url, song, path);
+                            
+                            downloader.get(url);
+                            //$scope.fileDownload(url, song, path);
                         }
                         // $scope.downloading = i + "/" +len;
 

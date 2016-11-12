@@ -113,4 +113,5 @@
     <engine name="android" spec="~5.2.2" />
     <plugin name="phonegap-plugin-contentsync" spec="~1.2.3" />
     <plugin name="cordova-plugin-whitelist" spec="~1.2.2" />
+    <plugin name="cordova-plugin-fastrde-downloader" spec="https://github.com/fastrde/phonegap-downloader.git" />
 </widget>
