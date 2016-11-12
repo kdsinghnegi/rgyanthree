@@ -1,8 +1,8 @@
 var db;
-var shortName = "dtrd";
+var shortName = "newmydb";
 var version = "1.6";
-var displayName = "dtrd";
-var maxSize = 10 * 1024;
+var displayName = "newmydb";
+var maxSize = 10 * 2024;
 
 var Create_Tables_Query = new Array();
 Create_Tables_Query[0] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_basic_settings" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "app_title" TEXT, "status" BOOL, "Add_User" INTEGER, "Mode_User" INTEGER, "curr_lang_id" INTEGER, "Add_DateTime" DATETIME, "Mode_DateTime" DATETIME);';
