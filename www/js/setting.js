@@ -256,6 +256,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
         {
 
             $timeout(function () {
+
+                $scope.preloader = "";
+                $scope.$apply();
                 //data inseting in basic setting tabel
                 if (typeof $scope.response.setting != 'undefined')
                 {
@@ -273,12 +276,18 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     }
 
                 }
+
+                $scope.preloader = "hidden";
+                $scope.$apply();
             }, 500);
 
 
 
 
             $timeout(function () {
+                $scope.preloader = "";
+                $scope.$apply();
+
                 //data inseting in basic language tabel
                 if (typeof $scope.response.language != 'undefined')
                 {
@@ -296,12 +305,18 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     }
 
                 }
+
+                $scope.preloader = "hidden";
+                $scope.$apply();
+
             }, 500);
 
 
 
 
             $timeout(function () {
+                $scope.preloader = "";
+                $scope.$apply();
                 //data inseting in basic catDesc tabel
                 if (typeof $scope.response.catDesc != 'undefined')
                 {
@@ -313,17 +328,23 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                         var values = Object.values(catDesc[i]);
                         //var values =setting[i].valueOf();
                         $scope.insertData(coloumn, values, 'nrgyn_main_cat_des');
+                        $scope.preloader = "hidden";
+                        $scope.$apply();
 //                    $scope.mylog(setting[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
                     }
 
                 }
+
+
             }, 500);
 
 
 
             $timeout(function () {
+                $scope.preloader = "";
+                $scope.$apply();
                 //data inseting in basic category tabel
                 if (typeof $scope.response.category != 'undefined')
                 {
@@ -335,17 +356,24 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                         var values = Object.values(category[i]);
                         //var values =setting[i].valueOf();
                         $scope.insertData(coloumn, values, 'nrgyn_main_cat');
+                        $scope.preloader = "hidden";
+                        $scope.$apply();
 //                    $scope.mylog(category[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
                     }
 
                 }
+
+
             }, 500);
 
 
 
             $timeout(function () {
+                $scope.preloader = "";
+                $scope.$apply();
+
                 //data inseting in basic dailySongs tabel
                 if (typeof $scope.response.dailySongs != 'undefined')
                 {
@@ -357,6 +385,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                         var values = Object.values(dailySongs[i]);
                         //var values =setting[i].valueOf();
                         $scope.insertData(coloumn, values, 'nrgyn_daily_songs');
+                        $scope.preloader = "hidden";
+                        $scope.$apply();
 //                    $scope.mylog(dailySongs[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
@@ -368,6 +398,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
             $timeout(function () {
+                $scope.preloader = "";
+                $scope.$apply();
                 //data inseting in basic post tabel
                 if (typeof $scope.response.post != 'undefined')
                 {
@@ -382,7 +414,10 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 //                    $scope.mylog(post[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
+                        $scope.preloader = "hidden";
+                        $scope.$apply();
                     }
+
 
                 }
             }, 500);
@@ -406,10 +441,10 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 //                    $scope.mylog(postDesc[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
+                        $scope.preloader = "hidden";
+                        $scope.$apply();
                     }
 
-                    $scope.preloader = "hidden";
-                    $scope.$apply();
 
                 }
             }, 500);
@@ -989,7 +1024,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     for (i = 0; i < len; i++) {
 
                         var song = results.rows.item(i).offline_song;
-                        var url = $scope.siteUrl + "upload/img/" + song;
+                        var url = $scope.siteUrl + "upload/mp3/" + song;
                         var path = "";
 
                         var fileUrlInlocal = $scope.ImageDir + path + song;
