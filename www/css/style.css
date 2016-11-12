@@ -349,5 +349,7 @@ h1.MantraTitleCustom
 p.postDescibe
 {
     text-align: left !important;
+    height: 60px;
+    overflow: hidden;
     /*    float: left;*/
 }
