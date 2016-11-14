@@ -55,7 +55,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
     $scope.PostDesc = {};
     $scope.PostDescStatus = "hidden";
-    $scope.siteUrl = "http://rgyan.nexgi.com/";
+    $scope.siteUrl = "http://rgyan.nexibms.in/";
 
 
     $scope.backScreenid = 0; // increment upt0 4;
@@ -481,7 +481,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
         try
         {
 
-            $http.get("http://rgyan.nexgi.com/index.php/api")
+            $http.get("http://rgyan.nexibms.in/index.php/api")
                     // $http.get("sql/data.json")
                     .then(function (response) {
                         $scope.response = response.data;
