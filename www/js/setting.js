@@ -452,16 +452,50 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
         }
 
         $scope.appInit();
-        $scope.assetsDownload();
+        $scope.checkbeforeDownload();
 
 
 
 
     };
 
+    $scope.checkbeforeDownload = function ()
+    {
+
+        document.addEventListener("offline", function () {
+            $scope.mylog("Sorry Internet to avaliable..");
+        }, false);
+//donwload files
+        if (db)
+        {
+            db.transaction(function (transaction) {
+
+                var sql = "SELECT * from nrgyn_basic_settings";
+                transaction.executeSql(sql, []
+                        , function (tx, results) {
+                            $scope.mylog("day row" + results.rows);
+                            if (results.rows.length > 0)
+                            {
+                                $scope.assetsDownload();
+                            }
+                            // $scope.mylog(results.rows);
+
+                            //start download
+
+                            //end download 
+
+                        }
+                , function (error) {
+                    $scope.mylog(error);
+                });
+            });
+        }
+
+
+
+    };
+
     $scope.urlEncode = function (image) {
-
-
         return $scope.ImageDir + image;
 
     };
@@ -1020,7 +1054,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     //$("#rowCount").append(len);
 
                     //cordova.file.createDir($scope.ImageDir,"img");
-                   // downloader.init({folder: $scope.ImageDir});
+                    // downloader.init({folder: $scope.ImageDir});
                     for (i = 0; i < len; i++) {
 
                         var song = results.rows.item(i).offline_song;
@@ -1030,8 +1064,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                         var fileUrlInlocal = $scope.ImageDir + path + song;
                         if (!$scope.fileExists(fileUrlInlocal))
                         {
-                            
-                           // downloader.get(url);
+
+                            // downloader.get(url);
                             $scope.fileDownload(url, song, path);
                         }
                         // $scope.downloading = i + "/" +len;
