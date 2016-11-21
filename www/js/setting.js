@@ -250,7 +250,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
         {
 
             $timeout(function () {
-
+ $scope.preloader = '';
 
                 //  $scope.$apply();
                 //data inseting in basic setting tabel
@@ -280,6 +280,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
             $timeout(function () {
+                 $scope.preloader = '';
 //                $scope.preloader = "";
 //                $scope.$apply();
 
@@ -312,6 +313,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
             $timeout(function () {
+                 $scope.preloader = '';
 //                $scope.preloader = "";
 //                $scope.$apply();
                 //data inseting in basic catDesc tabel
@@ -342,6 +344,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
             $timeout(function () {
+                 $scope.preloader = '';
 //                $scope.preloader = "";
 //                $scope.$apply();
                 //data inseting in basic category tabel
@@ -372,6 +375,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
             $timeout(function () {
+                 $scope.preloader = '';
 //                $scope.preloader = "";
 //                $scope.$apply();
 
@@ -401,6 +405,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
             $timeout(function () {
+                 $scope.preloader = '';
 //                $scope.preloader = "";
 //                $scope.$apply();
                 //data inseting in basic post tabel
@@ -430,6 +435,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
             $timeout(function () {
+                 $scope.preloader = '';
                 //data inseting in basic postDesc tabel
 //                $scope.preloader = "";
 //                $scope.$apply();
@@ -466,16 +472,16 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
     };
 
-    
+
 //    $scope.$watch($scope.preloader, function () {
 //        
 //        $scope.TrackPreloader();
 //    });
-    
+
 
     $scope.TrackPreloader = function () {
-         $scope.preloader = 'hidden';
-    $scope.preloader = '';
+        $scope.preloader = 'hidden';
+       // $scope.preloader = '';
     };
 
     $scope.checkbeforeDownload = function ()
