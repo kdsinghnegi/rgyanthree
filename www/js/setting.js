@@ -246,19 +246,13 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
     };
     $scope.ImportDataInTables = function () {
-
-
-
-
-
-
         if ($scope.response != null)
         {
 
             $timeout(function () {
 
-                $scope.preloader = "";
-                $scope.$apply();
+                
+              //  $scope.$apply();
                 //data inseting in basic setting tabel
                 if (typeof $scope.response.setting != 'undefined')
                 {
@@ -266,6 +260,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     var i = 0;
                     for (i = 0; i < setting.length; i++)
                     {
+                        $scope.preloader = "";
                         var coloumn = Object.keys(setting[i]).toString();
                         var values = Object.values(setting[i]);
                         //var values =setting[i].valueOf();
@@ -297,6 +292,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     {
                         var coloumn = Object.keys(language[i]).toString();
                         var values = Object.values(language[i]);
+                        $scope.preloader = "";
                         //var values =setting[i].valueOf();
                         $scope.insertData(coloumn, values, 'nrgyn_app_langs');
 //                    $scope.mylog(language[i]);
@@ -326,6 +322,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     {
                         var coloumn = Object.keys(catDesc[i]).toString();
                         var values = Object.values(catDesc[i]);
+                        $scope.preloader = "";
                         //var values =setting[i].valueOf();
                         $scope.insertData(coloumn, values, 'nrgyn_main_cat_des');
 //                        $scope.preloader = "hidden";
@@ -354,6 +351,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     {
                         var coloumn = Object.keys(category[i]).toString();
                         var values = Object.values(category[i]);
+                        $scope.preloader = "";
                         //var values =setting[i].valueOf();
                         $scope.insertData(coloumn, values, 'nrgyn_main_cat');
 //                        $scope.preloader = "hidden";
@@ -383,6 +381,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     {
                         var coloumn = Object.keys(dailySongs[i]).toString();
                         var values = Object.values(dailySongs[i]);
+                        $scope.preloader = "";
                         //var values =setting[i].valueOf();
                         $scope.insertData(coloumn, values, 'nrgyn_daily_songs');
 //                        $scope.preloader = "hidden";
@@ -409,6 +408,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     {
                         var coloumn = Object.keys(post[i]).toString();
                         var values = Object.values(post[i]);
+                        $scope.preloader = "";
                         //var values =setting[i].valueOf();
                         $scope.insertData(coloumn, values, 'nrgyn_posts');
 //                    $scope.mylog(post[i]);
@@ -436,6 +436,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     {
                         var coloumn = Object.keys(postDesc[i]).toString();
                         var values = Object.values(postDesc[i]);
+                        $scope.preloader = "";
                         //var values =setting[i].valueOf();
                         $scope.insertData(coloumn, values, 'nrgyn_posts_des');
 //                    $scope.mylog(postDesc[i]);
