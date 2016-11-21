@@ -260,7 +260,6 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     var i = 0;
                     for (i = 0; i < setting.length; i++)
                     {
-
                         var coloumn = Object.keys(setting[i]).toString();
                         var values = Object.values(setting[i]);
                         //var values =setting[i].valueOf();
@@ -467,11 +466,16 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
     };
 
-    $scope.TrackPreloader = function () {
-
-    $scope.preloader ='';
+    
+//    $scope.$watch($scope.preloader, function () {
+//        
+//        $scope.TrackPreloader();
+//    });
     
 
+    $scope.TrackPreloader = function () {
+         $scope.preloader = 'hidden';
+    $scope.preloader = '';
     };
 
     $scope.checkbeforeDownload = function ()
