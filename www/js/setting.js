@@ -250,7 +250,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
         {
 
             $timeout(function () {
-                $scope.preloader = '';
+                
 
                 //  $scope.$apply();
                 //data inseting in basic setting tabel
@@ -260,6 +260,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     var i = 0;
                     for (i = 0; i < setting.length; i++)
                     {
+                        $scope.TrackPreloader('show');
 
                         var coloumn = Object.keys(setting[i]).toString();
                         var values = Object.values(setting[i]);
@@ -614,6 +615,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
         $scope.getBasicSetting();
         $scope.getMainCategory();
         $scope.DailySongs();
+        $scope.transferList("hide");
        // $scope.preloader = "hidden";
         // $scope.preloader = "hidden";
         $scope.$apply();
