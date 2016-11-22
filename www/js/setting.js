@@ -354,7 +354,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     i = 0;
                     for (i = 0; i < category.length; i++)
                     {
-                        //$scope.TrackPreloader('show');
+                        $scope.TrackPreloader('show');
                         var coloumn = Object.keys(category[i]).toString();
                         var values = Object.values(category[i]);
                         // $scope.preloader = "";
@@ -365,6 +365,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 //                    $scope.mylog(category[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
+                        $scope.TrackPreloader('hide');
                     }
 
                     $scope.appInit();
@@ -614,7 +615,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
         $scope.getMainCategory();
         $scope.DailySongs();
         //
-        ///$scope.TrackPreloader("hide");
+        $scope.TrackPreloader('hide');
         // $scope.preloader = "hidden";
         // $scope.preloader = "hidden";
         // $scope.$apply();
