@@ -277,7 +277,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
                 // $scope.preloader = "hidden";
                 //  $scope.$apply();
-            }, 500);
+            }, 1);
 
 
 
@@ -310,7 +310,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 //                $scope.preloader = "hidden";
 //                $scope.$apply();
 
-            }, 500);
+            }, 1);
 
 
 
@@ -343,7 +343,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                 }
 
 
-            }, 500);
+            }, 1);
 
 
 
@@ -374,7 +374,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                 }
 
 
-            }, 500);
+            }, 1);
 
 
 
@@ -402,7 +402,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     $scope.TrackPreloader('hide');
 
                 }
-            }, 500);
+            }, 1);
 
 
 
@@ -432,7 +432,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
                 }
-            }, 500);
+            }, 1);
 
 
 
@@ -464,7 +464,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
                 }
-            }, 500);
+            }, 1);
 
         }
 
@@ -493,6 +493,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
         {
             $scope.preloader = 'hidden';
         }
+        
+        $scope.$apply();
         // $scope.preloader = '';
     };
 
