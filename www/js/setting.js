@@ -360,15 +360,16 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                         // $scope.preloader = "";
                         //var values =setting[i].valueOf();
                         $scope.insertData(coloumn, values, 'nrgyn_main_cat');
-
 //                        $scope.preloader = "hidden";
 //                        $scope.$apply();
 //                    $scope.mylog(category[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
                     }
-                    
-                    
+
+                    $scope.appInit();
+                    $scope.checkbeforeDownload();
+
                     //$scope.TrackPreloader('hide');
 
                 }
@@ -421,7 +422,6 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                         // $scope.preloader = "";
                         //var values =setting[i].valueOf();
                         $scope.insertData(coloumn, values, 'nrgyn_posts');
-
 //                    $scope.mylog(post[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
@@ -468,8 +468,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
         }
 
-        $scope.appInit();
-        $scope.checkbeforeDownload();
+
 
 
 
@@ -493,7 +492,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
         {
             $scope.preloader = 'hidden';
         }
-        
+
         //$scope.$apply();
         // $scope.preloader = '';
     };
@@ -614,10 +613,10 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
         $scope.getBasicSetting();
         $scope.getMainCategory();
         $scope.DailySongs();
-        $scope.TrackPreloader("hide");
-       // $scope.preloader = "hidden";
+        ///$scope.TrackPreloader("hide");
         // $scope.preloader = "hidden";
-       // $scope.$apply();
+        // $scope.preloader = "hidden";
+        // $scope.$apply();
 
 
     };
