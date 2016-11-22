@@ -2,7 +2,7 @@ var db;
 var shortName = "newmydb";
 var version = "1.6";
 var displayName = "newmydb";
-var maxSize = 10 * 2024;
+var maxSize = 500 * 2024;
 
 var Create_Tables_Query = new Array();
 Create_Tables_Query[0] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_basic_settings" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "app_title" TEXT, "status" BOOL, "Add_User" INTEGER, "Mode_User" INTEGER, "curr_lang_id" INTEGER, "Add_DateTime" DATETIME, "Mode_DateTime" DATETIME);';
@@ -275,7 +275,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
                 // $scope.preloader = "hidden";
                 //  $scope.$apply();
-            }, 10);
+            }, 500);
 
 
 
@@ -308,7 +308,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 //                $scope.preloader = "hidden";
 //                $scope.$apply();
 
-            }, 10);
+            }, 500);
 
 
 
@@ -341,7 +341,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                 }
 
 
-            }, 10);
+            }, 500);
 
 
 
@@ -372,7 +372,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                 }
 
 
-            }, 10);
+            }, 500);
 
 
 
@@ -400,7 +400,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     $scope.TrackPreloader('hide');
 
                 }
-            }, 10);
+            }, 500);
 
 
 
@@ -430,7 +430,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
                 }
-            }, 10);
+            }, 500);
 
 
 
@@ -462,7 +462,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
                 }
-            }, 10);
+            }, 500);
 
         }
 
@@ -492,7 +492,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
             $scope.preloader = 'hidden';
         }
         
-        $scope.$apply();
+        //$scope.$apply();
         // $scope.preloader = '';
     };
 
@@ -615,7 +615,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
         $scope.TrackPreloader("hide");
        // $scope.preloader = "hidden";
         // $scope.preloader = "hidden";
-        $scope.$apply();
+       // $scope.$apply();
 
 
     };
