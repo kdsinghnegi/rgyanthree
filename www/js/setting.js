@@ -365,9 +365,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 //                    $scope.mylog(category[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
-                        $scope.TrackPreloader('hide');
+                       //
                     }
-
+                     $scope.TrackPreloader('hide');
                     $scope.appInit();
                     $scope.checkbeforeDownload();
 
@@ -494,7 +494,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
             $scope.preloader = 'hidden';
         }
 
-        //$scope.$apply();
+        $scope.$apply();
         // $scope.preloader = '';
     };
 
