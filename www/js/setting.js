@@ -250,8 +250,6 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
         {
 
             $timeout(function () {
-                
-
                 //  $scope.$apply();
                 //data inseting in basic setting tabel
                 if (typeof $scope.response.setting != 'undefined')
@@ -261,7 +259,6 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     for (i = 0; i < setting.length; i++)
                     {
                         $scope.TrackPreloader('show');
-
                         var coloumn = Object.keys(setting[i]).toString();
                         var values = Object.values(setting[i]);
                         //var values =setting[i].valueOf();
@@ -272,13 +269,13 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 //                    $scope.mylog(values);
                     }
 
-                    $scope.TrackPreloader('over');
+                    $scope.TrackPreloader('hide');
 
                 }
 
                 // $scope.preloader = "hidden";
                 //  $scope.$apply();
-            }, 1);
+            }, 10);
 
 
 
@@ -311,7 +308,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 //                $scope.preloader = "hidden";
 //                $scope.$apply();
 
-            }, 1);
+            }, 10);
 
 
 
@@ -344,7 +341,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                 }
 
 
-            }, 1);
+            }, 10);
 
 
 
@@ -375,7 +372,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                 }
 
 
-            }, 1);
+            }, 10);
 
 
 
@@ -403,7 +400,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     $scope.TrackPreloader('hide');
 
                 }
-            }, 1);
+            }, 10);
 
 
 
@@ -433,7 +430,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
                 }
-            }, 1);
+            }, 10);
 
 
 
@@ -465,7 +462,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
                 }
-            }, 1);
+            }, 10);
 
         }
 
