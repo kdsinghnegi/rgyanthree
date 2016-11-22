@@ -250,7 +250,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
         {
 
             $timeout(function () {
- $scope.preloader = '';
+                $scope.preloader = '';
 
                 //  $scope.$apply();
                 //data inseting in basic setting tabel
@@ -260,15 +260,18 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     var i = 0;
                     for (i = 0; i < setting.length; i++)
                     {
+
                         var coloumn = Object.keys(setting[i]).toString();
                         var values = Object.values(setting[i]);
                         //var values =setting[i].valueOf();
                         $scope.insertData(coloumn, values, 'nrgyn_basic_settings');
-                        $scope.TrackPreloader();
+
 //                    $scope.mylog(setting[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
                     }
+
+                    $scope.TrackPreloader('over');
 
                 }
 
@@ -280,9 +283,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
             $timeout(function () {
-                 $scope.preloader = '';
-//                $scope.preloader = "";
-//                $scope.$apply();
+
 
                 //data inseting in basic language tabel
                 if (typeof $scope.response.language != 'undefined')
@@ -291,16 +292,18 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     i = 0;
                     for (i = 0; i < language.length; i++)
                     {
+                        $scope.TrackPreloader('show');
                         var coloumn = Object.keys(language[i]).toString();
                         var values = Object.values(language[i]);
                         //   $scope.preloader = "";
                         //var values =setting[i].valueOf();
                         $scope.insertData(coloumn, values, 'nrgyn_app_langs');
-                        $scope.TrackPreloader();
+                        //  $scope.TrackPreloader();
 //                    $scope.mylog(language[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
                     }
+                    $scope.TrackPreloader('hide');
 
                 }
 
@@ -313,9 +316,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
             $timeout(function () {
-                 $scope.preloader = '';
-//                $scope.preloader = "";
-//                $scope.$apply();
+
                 //data inseting in basic catDesc tabel
                 if (typeof $scope.response.catDesc != 'undefined')
                 {
@@ -323,12 +324,13 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     i = 0;
                     for (i = 0; i < catDesc.length; i++)
                     {
+                        $scope.TrackPreloader('show');
                         var coloumn = Object.keys(catDesc[i]).toString();
                         var values = Object.values(catDesc[i]);
 //                        $scope.preloader = "";
                         //var values =setting[i].valueOf();
                         $scope.insertData(coloumn, values, 'nrgyn_main_cat_des');
-                        $scope.TrackPreloader();
+
 //                        $scope.preloader = "hidden";
 //                        $scope.$apply();
 //                    $scope.mylog(setting[i]);
@@ -336,6 +338,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 //                    $scope.mylog(values);
                     }
 
+                    $scope.TrackPreloader('hide');
+
                 }
 
 
@@ -344,9 +348,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
             $timeout(function () {
-                 $scope.preloader = '';
-//                $scope.preloader = "";
-//                $scope.$apply();
+
                 //data inseting in basic category tabel
                 if (typeof $scope.response.category != 'undefined')
                 {
@@ -354,18 +356,20 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     i = 0;
                     for (i = 0; i < category.length; i++)
                     {
+                        $scope.TrackPreloader('show');
                         var coloumn = Object.keys(category[i]).toString();
                         var values = Object.values(category[i]);
                         // $scope.preloader = "";
                         //var values =setting[i].valueOf();
                         $scope.insertData(coloumn, values, 'nrgyn_main_cat');
-                        $scope.TrackPreloader();
+
 //                        $scope.preloader = "hidden";
 //                        $scope.$apply();
 //                    $scope.mylog(category[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
                     }
+                    $scope.TrackPreloader('hide');
 
                 }
 
@@ -375,9 +379,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
             $timeout(function () {
-                 $scope.preloader = '';
-//                $scope.preloader = "";
-//                $scope.$apply();
+
 
                 //data inseting in basic dailySongs tabel
                 if (typeof $scope.response.dailySongs != 'undefined')
@@ -386,18 +388,18 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     var i = 0;
                     for (i = 0; i < dailySongs.length; i++)
                     {
+                        $scope.TrackPreloader('show');
                         var coloumn = Object.keys(dailySongs[i]).toString();
                         var values = Object.values(dailySongs[i]);
                         //  $scope.preloader = "";
                         //var values =setting[i].valueOf();
                         $scope.insertData(coloumn, values, 'nrgyn_daily_songs');
-                        $scope.TrackPreloader();
-//                        $scope.preloader = "hidden";
-//                        $scope.$apply();
+
 //                    $scope.mylog(dailySongs[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
                     }
+                    $scope.TrackPreloader('hide');
 
                 }
             }, 500);
@@ -405,9 +407,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
             $timeout(function () {
-                 $scope.preloader = '';
-//                $scope.preloader = "";
-//                $scope.$apply();
+
                 //data inseting in basic post tabel
                 if (typeof $scope.response.post != 'undefined')
                 {
@@ -415,18 +415,20 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     i = 0;
                     for (i = 0; i < post.length; i++)
                     {
+                        $scope.TrackPreloader('show');
                         var coloumn = Object.keys(post[i]).toString();
                         var values = Object.values(post[i]);
                         // $scope.preloader = "";
                         //var values =setting[i].valueOf();
                         $scope.insertData(coloumn, values, 'nrgyn_posts');
-                        $scope.TrackPreloader();
+
 //                    $scope.mylog(post[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
 //                        $scope.preloader = "hidden";
 //                        $scope.$apply();
                     }
+                    $scope.TrackPreloader('hide');
 
 
                 }
@@ -435,7 +437,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
             $timeout(function () {
-                 $scope.preloader = '';
+
                 //data inseting in basic postDesc tabel
 //                $scope.preloader = "";
 //                $scope.$apply();
@@ -445,18 +447,20 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
                     i = 0;
                     for (i = 0; i < postDesc.length; i++)
                     {
+                        $scope.TrackPreloader('show');
                         var coloumn = Object.keys(postDesc[i]).toString();
                         var values = Object.values(postDesc[i]);
                         //     $scope.preloader = "";
                         //var values =setting[i].valueOf();
                         $scope.insertData(coloumn, values, 'nrgyn_posts_des');
-                        $scope.TrackPreloader();
+
 //                    $scope.mylog(postDesc[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
 //                        $scope.preloader = "hidden";
 //                        $scope.$apply();
                     }
+                    $scope.TrackPreloader('hide');
 
 
                 }
@@ -479,9 +483,17 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 //    });
 
 
-    $scope.TrackPreloader = function () {
-        $scope.preloader = 'hidden';
-       // $scope.preloader = '';
+    $scope.TrackPreloader = function (opt) {
+
+        if (opt === 'show')
+        {
+            $scope.preloader = '';
+        }
+        else if (opt === 'hide')
+        {
+            $scope.preloader = 'hidden';
+        }
+        // $scope.preloader = '';
     };
 
     $scope.checkbeforeDownload = function ()
