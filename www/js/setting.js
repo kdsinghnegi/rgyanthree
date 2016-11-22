@@ -615,7 +615,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
         $scope.TrackPreloader("hide");
        // $scope.preloader = "hidden";
         // $scope.preloader = "hidden";
-        $scope.$apply();
+       // $scope.$apply();
 
 
     };
