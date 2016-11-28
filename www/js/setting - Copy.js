@@ -1,8 +1,8 @@
 var db;
-var shortName = "babbly";
+var shortName = "newmydb";
 var version = "1.6";
-var displayName = "babbly";
-var maxSize = 5000 * 2024;
+var displayName = "newmydb";
+var maxSize = 500 * 2024;
 
 var Create_Tables_Query = new Array();
 Create_Tables_Query[0] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_basic_settings" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "app_title" TEXT, "status" BOOL, "Add_User" INTEGER, "Mode_User" INTEGER, "curr_lang_id" INTEGER, "Add_DateTime" DATETIME, "Mode_DateTime" DATETIME);';
@@ -14,7 +14,7 @@ Create_Tables_Query[5] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_posts" ("post_id" 
 Create_Tables_Query[6] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_posts_des" ("post_des_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "post_id" INTEGER, "lang_id" INTEGER, "post_title" TEXT, "post_desc" TEXT);';
 
 var ang_app = angular.module("rgyan", []);
-ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $interval) {
+ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout) {
 
 
 
@@ -275,34 +275,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
                 // $scope.preloader = "hidden";
                 //  $scope.$apply();
-            }, 5000);
-
-            $timeout(function () {
+            }, 500);
 
 
-
-                //data inseting in basic dailySongs tabel
-                if (typeof $scope.response.dailySongs != 'undefined')
-                {
-                    var dailySongs = $scope.response.dailySongs;
-                    var i = 0;
-                    for (i = 0; i < dailySongs.length; i++)
-                    {
-                        //$scope.TrackPreloader('show');
-                        var coloumn = Object.keys(dailySongs[i]).toString();
-                        var values = Object.values(dailySongs[i]);
-                        //  $scope.preloader = "";
-                        //var values =setting[i].valueOf();
-                        $scope.insertData(coloumn, values, 'nrgyn_daily_songs');
-
-//                    $scope.mylog(dailySongs[i]);
-//                    $scope.mylog(coloumn);
-//                    $scope.mylog(values);
-                    }
-                    //$scope.TrackPreloader('hide');
-
-                }
-            }, 5000);
 
 
             $timeout(function () {
@@ -333,249 +308,166 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 //                $scope.preloader = "hidden";
 //                $scope.$apply();
 
-            }, 5000);
+            }, 500);
 
 
 
-            $scope.catDesc_page = 0;
-            $scope.stopCatDesc = 0;
-            $interval(function () {
 
-                if ($scope.stopCatDesc === 1)
+            $timeout(function () {
+
+                //data inseting in basic catDesc tabel
+                if (typeof $scope.response.catDesc != 'undefined')
                 {
-                    return 0;
-                }
-
-                $scope.catDesc_page = $scope.catDesc_page + 1;
-                $http.get("http://rgyan.nexibms.in/index.php/api/catedesc?page=" + $scope.catDesc_page)
-                        // $http.get("sql/data.json")
-                        .then(function (response) {
-                            console.log("new response catefory desc");
-                            console.log(response);
-
-                            //data inseting in basic catDesc tabel
-                            if (typeof response.data.catDesc != 'undefined')
-                            {
-                                var catDesc = response.data.catDesc;
-
-                                if (catDesc.length == 0)
-                                {
-                                    $scope.stopCatDesc = 1;
-                                    $scope.$apply();
-                                    alert("response");
-                                    return 0;
-                                }
-
-
-                                i = 0;
-                                for (i = 0; i < catDesc.length; i++)
-                                {
-                                    //$scope.TrackPreloader('show');
-                                    var coloumn = Object.keys(catDesc[i]).toString();
-                                    var values = Object.values(catDesc[i]);
+                    var catDesc = $scope.response.catDesc;
+                    i = 0;
+                    for (i = 0; i < catDesc.length; i++)
+                    {
+                        //$scope.TrackPreloader('show');
+                        var coloumn = Object.keys(catDesc[i]).toString();
+                        var values = Object.values(catDesc[i]);
 //                        $scope.preloader = "";
-                                    //var values =setting[i].valueOf();
-                                    $scope.insertData(coloumn, values, 'nrgyn_main_cat_des');
+                        //var values =setting[i].valueOf();
+                        $scope.insertData(coloumn, values, 'nrgyn_main_cat_des');
 
-                                }
+//                        $scope.preloader = "hidden";
+//                        $scope.$apply();
+//                    $scope.mylog(setting[i]);
+//                    $scope.mylog(coloumn);
+//                    $scope.mylog(values);
+                    }
 
-                                //$scope.TrackPreloader('hide');
+                    //$scope.TrackPreloader('hide');
 
-                            }
-
-                        }, function (response) {
-                            $scope.mylog("Error in download database" + response.status);
-                            //   $scope.appInit();
-                        });
-
-
-
-
-
-            }, 5000);
-
-
-            $scope.cat_page = 0;
-            $scope.stopCat = 0;
-            $interval(function () {
-                if ($scope.stopCat === 1)
-                {
-                    return 0;
-                    
                 }
 
 
-                $scope.cat_page = $scope.cat_page + 1;
-                $http.get("http://rgyan.nexibms.in/index.php/api/category?page=" + $scope.cat_page)
-                        // $http.get("sql/data.json")
-                        .then(function (response) {
-                          //  console.log("category_length"+response.category.length);
-                            //data inseting in basic category tabel
-                            if (typeof response.data.category != 'undefined')
-                            {
-                                var category = response.data.category;
-                                i = 0;
-
-                                
-                                if (category.length == 0)
-                                {
-                                    console.log("yes its zero");
-                                    $scope.stopCat = 1;
-                                    $scope.$apply();
-                                    return 0;
-                                }
-                                for (i = 0; i < category.length; i++)
-                                {
-                                    //$scope.TrackPreloader('show');
-                                    var coloumn = Object.keys(category[i]).toString();
-                                    var values = Object.values(category[i]);
-                                    
-                                    console.log(coloumn);
-                                    // $scope.preloader = "";
-                                    //var values =setting[i].valueOf();
-                                    $scope.insertData(coloumn, values, 'nrgyn_main_cat');
-                                }
-                                //$scope.TrackPreloader('hide');
-
-                            }
+            }, 500);
 
 
 
-                        }, function (response) {
-                            $scope.mylog("Error in download database" + response.status);
-                            //   $scope.appInit();
-                        });
+            $timeout(function () {
 
-            }, 5000);
-
-
-
-
-
-
-            $scope.post_page = 0;
-            $scope.stopPost = 0;
-            $interval(function () {
-                if ($scope.stopPost === 1)
+                //data inseting in basic category tabel
+                if (typeof $scope.response.category != 'undefined')
                 {
-                    return 0;
+                    var category = $scope.response.category;
+                    i = 0;
+                    for (i = 0; i < category.length; i++)
+                    {
+                        $scope.TrackPreloader('show');
+                        var coloumn = Object.keys(category[i]).toString();
+                        var values = Object.values(category[i]);
+                        // $scope.preloader = "";
+                        //var values =setting[i].valueOf();
+                        $scope.insertData(coloumn, values, 'nrgyn_main_cat');
+//                        $scope.preloader = "hidden";
+//                        $scope.$apply();
+//                    $scope.mylog(category[i]);
+//                    $scope.mylog(coloumn);
+//                    $scope.mylog(values);
+                       //
+                    }
+                     $scope.TrackPreloader('hide');
+                    $scope.appInit();
+                    $scope.checkbeforeDownload();
+
+                    //$scope.TrackPreloader('hide');
+
                 }
 
 
-
-                $scope.post_page = $scope.post_page + 1;
-                $http.get("http://rgyan.nexibms.in/index.php/api/post?page=" + $scope.post_page)
-                        // $http.get("sql/data.json")
-                        .then(function (response) {
-
-//data inseting in basic post tabel
-                            if (typeof response.data.post != 'undefined')
-                            {
-                                var post = response.data.post;
-                                i = 0;
-
-                                if (post.length == 0)
-                                {
-                                    $scope.stopPost = 1;
-                                    $scope.$apply();
-                                    return 0;
-                                }
-
-                                for (i = 0; i < post.length; i++)
-                                {
-                                    //$scope.TrackPreloader('show');
-                                    var coloumn = Object.keys(post[i]).toString();
-                                    var values = Object.values(post[i]);
-                                    // $scope.preloader = "";
-                                    //var values =setting[i].valueOf();
-                                    $scope.insertData(coloumn, values, 'nrgyn_posts');
-                                }
-                                //$scope.TrackPreloader('hide');
-
-
-                            }
+            }, 500);
 
 
 
-                        }, function (response) {
-                            $scope.mylog("Error in download database" + response.status);
-                            //   $scope.appInit();
-                        });
+            $timeout(function () {
 
 
-
-
-            }, 5000);
-
-
-            $scope.postd_page = 0;
-            $scope.stopPostdesc = 0;
-            $interval(function () {
-
-                if ($scope.stopPostdesc === 1)
+                //data inseting in basic dailySongs tabel
+                if (typeof $scope.response.dailySongs != 'undefined')
                 {
-                    console.log("I m stopingggg");
-                    return 0;
+                    var dailySongs = $scope.response.dailySongs;
+                    var i = 0;
+                    for (i = 0; i < dailySongs.length; i++)
+                    {
+                        //$scope.TrackPreloader('show');
+                        var coloumn = Object.keys(dailySongs[i]).toString();
+                        var values = Object.values(dailySongs[i]);
+                        //  $scope.preloader = "";
+                        //var values =setting[i].valueOf();
+                        $scope.insertData(coloumn, values, 'nrgyn_daily_songs');
+
+//                    $scope.mylog(dailySongs[i]);
+//                    $scope.mylog(coloumn);
+//                    $scope.mylog(values);
+                    }
+                    //$scope.TrackPreloader('hide');
+
                 }
+            }, 500);
 
 
 
-                $scope.postd_page = $scope.postd_page + 1;
-                $http.get("http://rgyan.nexibms.in/index.php/api/postdesc?page=" + $scope.postd_page)
-                        // $http.get("sql/data.json")
-                        .then(function (response) {
-                            //data inseting in basic postDesc tabel
+            $timeout(function () {
+
+                //data inseting in basic post tabel
+                if (typeof $scope.response.post != 'undefined')
+                {
+                    var post = $scope.response.post;
+                    i = 0;
+                    for (i = 0; i < post.length; i++)
+                    {
+                        //$scope.TrackPreloader('show');
+                        var coloumn = Object.keys(post[i]).toString();
+                        var values = Object.values(post[i]);
+                        // $scope.preloader = "";
+                        //var values =setting[i].valueOf();
+                        $scope.insertData(coloumn, values, 'nrgyn_posts');
+//                    $scope.mylog(post[i]);
+//                    $scope.mylog(coloumn);
+//                    $scope.mylog(values);
+//                        $scope.preloader = "hidden";
+//                        $scope.$apply();
+                    }
+                    //$scope.TrackPreloader('hide');
+
+
+                }
+            }, 500);
+
+
+
+            $timeout(function () {
+
+                //data inseting in basic postDesc tabel
 //                $scope.preloader = "";
 //                $scope.$apply();
-                            if (typeof response.data.postDesc != 'undefined')
-                            {
-                                var postDesc = response.data.postDesc;
-                                i = 0;
-
-                                if (postDesc.length == 0)
-                                {
-                                    $scope.stopPostdesc = 1;
-                                    $scope.$apply();
-                                    return 0;
-                                }
-                                for (i = 0; i < postDesc.length; i++)
-                                {
-                                    //$scope.TrackPreloader('show');
-                                    var coloumn = Object.keys(postDesc[i]).toString();
-                                    var values = Object.values(postDesc[i]);
-                                    //     $scope.preloader = "";
-                                    //var values =setting[i].valueOf();
-                                    $scope.insertData(coloumn, values, 'nrgyn_posts_des');
+                if (typeof $scope.response.postDesc != 'undefined')
+                {
+                    var postDesc = $scope.response.postDesc;
+                    i = 0;
+                    for (i = 0; i < postDesc.length; i++)
+                    {
+                        //$scope.TrackPreloader('show');
+                        var coloumn = Object.keys(postDesc[i]).toString();
+                        var values = Object.values(postDesc[i]);
+                        //     $scope.preloader = "";
+                        //var values =setting[i].valueOf();
+                        $scope.insertData(coloumn, values, 'nrgyn_posts_des');
 
 //                    $scope.mylog(postDesc[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
 //                        $scope.preloader = "hidden";
 //                        $scope.$apply();
-                                }
-                                //$scope.TrackPreloader('hide');
+                    }
+                    //$scope.TrackPreloader('hide');
 
 
-                            }
-
-
-
-                        }, function (response) {
-                            $scope.mylog("Error in download database" + response.status);
-                            //   $scope.appInit();
-                        });
-
-
-
-            }, 5000);
-
-
-
+                }
+            }, 500);
 
         }
-
-        $scope.appInit();
-        $scope.checkbeforeDownload();
 
 
 
@@ -602,7 +494,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
             $scope.preloader = 'hidden';
         }
 
-        // $scope.$apply();
+        $scope.$apply();
         // $scope.preloader = '';
     };
 
