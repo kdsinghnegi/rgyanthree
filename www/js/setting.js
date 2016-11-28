@@ -339,10 +339,11 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
             $scope.catDesc_page = 0;
             $scope.stopCatDesc = 0;
-            $interval(function () {
+           var catDesp = $interval(function () {
 
                 if ($scope.stopCatDesc === 1)
                 {
+                    clearInterval(catDesp);
                     return 0;
                 }
 
@@ -397,9 +398,10 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
             $scope.cat_page = 0;
             $scope.stopCat = 0;
-            $interval(function () {
+           var cat_p= $interval(function () {
                 if ($scope.stopCat === 1)
                 {
+                     clearInterval(cat_p);
                     return 0;
                     
                 }
@@ -455,9 +457,10 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
             $scope.post_page = 0;
             $scope.stopPost = 0;
-            $interval(function () {
+          var post_p =  $interval(function () {
                 if ($scope.stopPost === 1)
                 {
+                    clearInterval(post_p);
                     return 0;
                 }
 
@@ -510,11 +513,12 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
             $scope.postd_page = 0;
             $scope.stopPostdesc = 0;
-            $interval(function () {
+           var post_int = $interval(function () {
 
                 if ($scope.stopPostdesc === 1)
                 {
                     console.log("I m stopingggg");
+                    clearInterval(post_int);
                     return 0;
                 }
 
@@ -568,7 +572,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
 
             }, 5000);
-
+            
 
 
 
