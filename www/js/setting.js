@@ -611,7 +611,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
             $scope.preloader = 'hidden';
         }
 
-        // $scope.$apply();
+         $scope.$apply();
         // $scope.preloader = '';
     };
 
@@ -757,7 +757,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
                             $scope.app_title = results.rows.item(0).app_title;
                             //$scope.mylog($scope.app_title);
-                            // $scope.$apply();
+                            $scope.$apply();
                         }
                 , function (error) {
                     //$scope.mylog(error);
@@ -804,7 +804,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             $scope.homeIcon = "fa-home";
                             $scope.backScreenid = 0;
 
-                            //  $scope.$apply();
+                              $scope.$apply();
                             //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
                             //                    //$scope.mylog($scope.app_title);
@@ -866,7 +866,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             $scope.MainCatStatus = "hidden";
                             $scope.homeIcon = "fa-chevron-left";
                             $scope.backScreenid = 1;
-                            // $scope.$apply();
+                             $scope.$apply();
                             // //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
                             //                    //$scope.mylog($scope.app_title);
@@ -928,7 +928,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             $scope.backScreenid = 2;
 
 
-                            //$scope.$apply();
+                            $scope.$apply();
                             //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
                             //                    //$scope.mylog($scope.app_title);
@@ -986,7 +986,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             $scope.backScreenid = 3;
 
 
-                            // $scope.$apply();
+                             $scope.$apply();
                             //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
                             //                    //$scope.mylog($scope.app_title);
