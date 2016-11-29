@@ -395,7 +395,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                         });
 
 
-            }, 1000);
+            }, 600);
             
             var cat_page = 0;
             var stopCat = 0;
@@ -516,7 +516,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             //$scope.mylog("Error in download database" + response.status);
                             //   $scope.appInit();
                         });
-            }, 5000);
+            }, 1200);
 
 
           var  postd_page = 0;
@@ -577,7 +577,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             //   $scope.appInit();
                         });
 
-            }, 6000);
+            }, 1000);
 
 
 
@@ -730,7 +730,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
         $scope.getMainCategory();
         $scope.DailySongs();
         //
-        $scope.$apply();
+       // $scope.$apply();
 
         // $scope.preloader = "hidden";
         // $scope.preloader = "hidden";
