@@ -700,7 +700,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
         // $scope.preloader = "hidden";
         // $scope.preloader = "hidden";
-        // $scope.$apply();
+         $scope.$apply();
 
 
     };
