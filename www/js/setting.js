@@ -730,6 +730,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
         $scope.getMainCategory();
         $scope.DailySongs();
         //
+        $scope.$apply();
 
         // $scope.preloader = "hidden";
         // $scope.preloader = "hidden";
