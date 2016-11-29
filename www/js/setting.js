@@ -730,7 +730,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
         $scope.getMainCategory();
         $scope.DailySongs();
         //
-        $scope.$apply();
+       $scope.$applyAsync();
 
         // $scope.preloader = "hidden";
         // $scope.preloader = "hidden";
@@ -803,7 +803,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             $scope.MainCatStatus = "";
                             $scope.homeIcon = "fa-home";
                             $scope.backScreenid = 0;
-
+                            $scope.$applyAsync();
                             //  $scope.$apply();
                             //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
@@ -866,6 +866,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             $scope.MainCatStatus = "hidden";
                             $scope.homeIcon = "fa-chevron-left";
                             $scope.backScreenid = 1;
+                            $scope.$applyAsync();
                             // $scope.$apply();
                             // //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
@@ -926,7 +927,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             $scope.PostStatus = "";
                             $scope.homeIcon = "fa-chevron-left";
                             $scope.backScreenid = 2;
-
+                            $scope.$applyAsync();
 
                             //$scope.$apply();
                             //                    
@@ -984,7 +985,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
                             $scope.homeIcon = "fa-chevron-left";
                             $scope.backScreenid = 3;
-
+                            $scope.$applyAsync();
 
                             // $scope.$apply();
                             //                    
