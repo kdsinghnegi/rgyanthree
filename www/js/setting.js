@@ -655,7 +655,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
     $scope.ChangeLanguage = function (id)
     {
         $scope.curr_lang_id = id;
-        $scope.$apply();
+        $scope.$applyAsync();
         $scope.appInit();
     };
 
