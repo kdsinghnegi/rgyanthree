@@ -1,9 +1,9 @@
 /*global $ */
 
 var db;
-var shortName = "mkha";
+var shortName = "pune";
 var version = "1.6";
-var displayName = "mkha";
+var displayName = "pune";
 var maxSize = 5000 * 2024;
 
 var Create_Tables_Query = new Array();
@@ -335,31 +335,40 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
 
 
-            $scope.catDesc_page = 0;
-            $scope.stopCatDesc = 0;
+            var catDesc_page = 0;
+             var stopCatDesc = 0;
+            var catReqComp = false; 
             var catDesp = $interval(function () {
 
-                if ($scope.stopCatDesc === 1)
+                if (stopCatDesc === 1)
                 {
-                  //  clearInterval(catDesp);
+                    //  clearInterval(catDesp);
                     $interval.cancel(catDesp);
                     return 0;
                 }
 
-                $scope.catDesc_page = $scope.catDesc_page + 1;
-
-                $http.get("http://rgyan.nexibms.in/index.php/api/catedesc?page=" + $scope.catDesc_page)
+                if(catReqComp)
+                    return 0;
+                else
+                  catReqComp = true; 
+                 
+                catDesc_page = catDesc_page + 1;
+              
+                $http.get("http://rgyan.nexibms.in/index.php/api/catedesc?page=" + catDesc_page)
                         // $http.get("sql/data.json")
                         .then(function (response) {
+                            
+                            catReqComp = false;
+                            
                             if (typeof response.data.catDesc != 'undefined')
                             {
                                 var catDesc = response.data.catDesc;
 
                                 if (catDesc.length == 0)
                                 {
-                                    $scope.stopCatDesc = 1;
-//                                    $scope.$apply();
-                                   // alert("response");
+                                    stopCatDesc = 1;
+                                   // $scope.$apply();
+                                    //alert("response");
                                     return 0;
                                 }
 
@@ -386,14 +395,16 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                         });
 
 
-            }, 5000);
-            $scope.cat_page = 0;
-            $scope.stopCat = 0;
+            }, 1000);
+            
+            var cat_page = 0;
+            var stopCat = 0;
+             var cat_pReqComp = false; 
             var cat_p = $interval(function () {
-                if ($scope.stopCat === 1)
+                if (stopCat === 1)
                 {
-                    
-                   // clearInterval(cat_p);
+
+                    // clearInterval(cat_p);
                     $interval.cancel(cat_p);
                     $scope.appInit();
                     $scope.checkbeforeDownload();
@@ -401,11 +412,18 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
                 }
 
+                if(cat_pReqComp)
+                    return 0;
+                else
+                  cat_pReqComp = true; 
+                 
 
-                $scope.cat_page = $scope.cat_page + 1;
-                $http.get("http://rgyan.nexibms.in/index.php/api/category?page=" + $scope.cat_page)
+                cat_page = cat_page + 1;
+               
+                $http.get("http://rgyan.nexibms.in/index.php/api/category?page=" + cat_page)
                         // $http.get("sql/data.json")
                         .then(function (response) {
+                            cat_pReqComp = false; 
                             if (typeof response.data.category != 'undefined')
                             {
                                 var category = response.data.category;
@@ -415,8 +433,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                                 if (category.length == 0)
                                 {
                                     console.log("yes its zero");
-                                    $scope.stopCat = 1;
-//                                    $scope.$apply();
+                                    stopCat = 1;
+                                  
                                     return 0;
                                 }
                                 for (i = 0; i < category.length; i++)
@@ -444,30 +462,39 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
             }, 500);
 
 
-            $scope.post_page = 0;
-            $scope.stopPost = 0;
+            var post_page = 0;
+            var stopPost = 0;
+            var postReqComp = false;
             var post_p = $interval(function () {
-                if ($scope.stopPost === 1)
+                if (stopPost === 1)
                 {
-                  //  clearInterval(post_p);
+                    //  clearInterval(post_p);
                     $interval.cancel(post_p);
                     return 0;
                 }
 
-                $scope.post_page = $scope.post_page + 1;
+                 if(postReqComp)
+                    return 0;
+                else
+                  postReqComp = true; 
+              
+              
+                post_page = post_page + 1;
+                
 
-                $http.get("http://rgyan.nexibms.in/index.php/api/post?page=" + $scope.post_page)
+                $http.get("http://rgyan.nexibms.in/index.php/api/post?page=" + post_page)
                         // $http.get("sql/data.json")
                         .then(function (response) {
+                            
+                            postReqComp = false; 
                             if (typeof response.data.post != 'undefined')
                             {
                                 var post = response.data.post;
                                 i = 0;
-
                                 if (post.length == 0)
                                 {
-                                    $scope.stopPost = 1;
-//                                    $scope.$apply();
+                                    stopPost = 1;
+                                    
                                     return 0;
                                 }
 
@@ -492,25 +519,34 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
             }, 5000);
 
 
-            $scope.postd_page = 0;
-            $scope.stopPostdesc = 0;
+          var  postd_page = 0;
+          var  stopPostdesc = 0;
+          var postdesRe = false;
             var post_int = $interval(function () {
 
-                if ($scope.stopPostdesc === 1)
+                if (stopPostdesc === 1)
                 {
                     console.log("I m stopingggg");
                     $interval.cancel(post_int);
-                    
+
                     return 0;
                 }
+                
+                if(postdesRe)
+                    return 0;
+                else
+                  postdesRe = true; 
 
 
-
-                $scope.postd_page = $scope.postd_page + 1;
-
-                $http.get("http://rgyan.nexibms.in/index.php/api/postdesc?page=" + $scope.postd_page)
+                postd_page = postd_page + 1;
+               
+                $http.get("http://rgyan.nexibms.in/index.php/api/postdesc?page=" + postd_page)
                         // $http.get("sql/data.json")
                         .then(function (response) {
+                            
+                             postdesRe = false; 
+                     
+                     
                             if (typeof response.data.postDesc != 'undefined')
                             {
                                 var postDesc = response.data.postDesc;
@@ -518,8 +554,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
                                 if (postDesc.length == 0)
                                 {
-                                    $scope.stopPostdesc = 1;
-//                                    $scope.$apply();
+                                    stopPostdesc = 1;
+                                   
                                     return 0;
                                 }
                                 for (i = 0; i < postDesc.length; i++)
@@ -541,7 +577,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             //   $scope.appInit();
                         });
 
-            }, 5000);
+            }, 6000);
 
 
 
@@ -575,7 +611,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
             $scope.preloader = 'hidden';
         }
 
-       // $scope.$apply();
+        // $scope.$apply();
         // $scope.preloader = '';
     };
 
@@ -626,7 +662,6 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
     $scope.DownloadDataBase = function () {
 
         //Download database from server and store in $scope.response
-
         document.addEventListener("offline", $scope.appInit(), false);
 
 //        comment
@@ -698,7 +733,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
         // $scope.preloader = "hidden";
         // $scope.preloader = "hidden";
-       //  $scope.$apply();
+        //  $scope.$apply();
 
 
     };
@@ -721,7 +756,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
                             $scope.app_title = results.rows.item(0).app_title;
                             //$scope.mylog($scope.app_title);
-                           // $scope.$apply();
+                            // $scope.$apply();
                         }
                 , function (error) {
                     //$scope.mylog(error);
@@ -768,7 +803,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             $scope.homeIcon = "fa-home";
                             $scope.backScreenid = 0;
 
-                          //  $scope.$apply();
+                            //  $scope.$apply();
                             //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
                             //                    //$scope.mylog($scope.app_title);
@@ -830,8 +865,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             $scope.MainCatStatus = "hidden";
                             $scope.homeIcon = "fa-chevron-left";
                             $scope.backScreenid = 1;
-                           // $scope.$apply();
-                           // //                    
+                            // $scope.$apply();
+                            // //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
                             //                    //$scope.mylog($scope.app_title);
                         }
@@ -950,7 +985,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             $scope.backScreenid = 3;
 
 
-                           // $scope.$apply();
+                            // $scope.$apply();
                             //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
                             //                    //$scope.mylog($scope.app_title);
@@ -1087,7 +1122,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             $scope.PlaySong = "mp3/" + results.rows.item(0).offline_song;
                             $scope.SongName = results.rows.item(0).songTitle;
 
-                           // $scope.$apply();
+                            // $scope.$apply();
                             // document.getElementById('player').src = $scope.PlaySong;
                             //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
