@@ -341,7 +341,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
                 if ($scope.stopCatDesc === 1)
                 {
-                    clearInterval(catDesp);
+                  //  clearInterval(catDesp);
+                    $interval.cancel(catDesp);
                     return 0;
                 }
 
@@ -357,7 +358,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                                 if (catDesc.length == 0)
                                 {
                                     $scope.stopCatDesc = 1;
-                                    $scope.$apply();
+//                                    $scope.$apply();
                                    // alert("response");
                                     return 0;
                                 }
@@ -386,14 +387,14 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
 
             }, 5000);
-
-
             $scope.cat_page = 0;
             $scope.stopCat = 0;
             var cat_p = $interval(function () {
                 if ($scope.stopCat === 1)
                 {
-                    clearInterval(cat_p);
+                    
+                   // clearInterval(cat_p);
+                    $interval.cancel(cat_p);
                     $scope.appInit();
                     $scope.checkbeforeDownload();
                     return 0;
@@ -415,7 +416,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                                 {
                                     console.log("yes its zero");
                                     $scope.stopCat = 1;
-                                    $scope.$apply();
+//                                    $scope.$apply();
                                     return 0;
                                 }
                                 for (i = 0; i < category.length; i++)
@@ -448,7 +449,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
             var post_p = $interval(function () {
                 if ($scope.stopPost === 1)
                 {
-                    clearInterval(post_p);
+                  //  clearInterval(post_p);
+                    $interval.cancel(post_p);
                     return 0;
                 }
 
@@ -465,7 +467,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                                 if (post.length == 0)
                                 {
                                     $scope.stopPost = 1;
-                                    $scope.$apply();
+//                                    $scope.$apply();
                                     return 0;
                                 }
 
@@ -497,7 +499,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                 if ($scope.stopPostdesc === 1)
                 {
                     console.log("I m stopingggg");
-                    clearInterval(post_int);
+                    $interval.cancel(post_int);
+                    
                     return 0;
                 }
 
@@ -516,7 +519,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                                 if (postDesc.length == 0)
                                 {
                                     $scope.stopPostdesc = 1;
-                                    $scope.$apply();
+//                                    $scope.$apply();
                                     return 0;
                                 }
                                 for (i = 0; i < postDesc.length; i++)
@@ -572,7 +575,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
             $scope.preloader = 'hidden';
         }
 
-        // $scope.$apply();
+       // $scope.$apply();
         // $scope.preloader = '';
     };
 
@@ -720,7 +723,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
                             $scope.app_title = results.rows.item(0).app_title;
                             $scope.mylog($scope.app_title);
-                            $scope.$apply();
+                           // $scope.$apply();
                         }
                 , function (error) {
                     $scope.mylog(error);
@@ -767,7 +770,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             $scope.homeIcon = "fa-home";
                             $scope.backScreenid = 0;
 
-                            $scope.$apply();
+                          //  $scope.$apply();
                             //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
                             //                    $scope.mylog($scope.app_title);
@@ -829,8 +832,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             $scope.MainCatStatus = "hidden";
                             $scope.homeIcon = "fa-chevron-left";
                             $scope.backScreenid = 1;
-                            $scope.$apply();
-                            //                    
+                           // $scope.$apply();
+                           // //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
                             //                    $scope.mylog($scope.app_title);
                         }
@@ -891,7 +894,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             $scope.backScreenid = 2;
 
 
-                            $scope.$apply();
+                            //$scope.$apply();
                             //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
                             //                    $scope.mylog($scope.app_title);
@@ -949,7 +952,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             $scope.backScreenid = 3;
 
 
-                            $scope.$apply();
+                           // $scope.$apply();
                             //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
                             //                    $scope.mylog($scope.app_title);
@@ -1086,7 +1089,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             $scope.PlaySong = "mp3/" + results.rows.item(0).offline_song;
                             $scope.SongName = results.rows.item(0).songTitle;
 
-                            $scope.$apply();
+                           // $scope.$apply();
                             // document.getElementById('player').src = $scope.PlaySong;
                             //                    
                             //                    $scope.app_title = results.rows.item(0).app_title;
