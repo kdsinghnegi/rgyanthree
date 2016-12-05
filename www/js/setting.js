@@ -1,9 +1,9 @@
 /*global $ */
 
 var db;
-var shortName = "pune";
+var shortName = "mumbaia";
 var version = "1.6";
-var displayName = "pune";
+var displayName = "mumbaia";
 var maxSize = 5000 * 2024;
 
 var Create_Tables_Query = new Array();
@@ -554,6 +554,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                     // $http.get("sql/data.json")
                     .then(function (response) {
                         $scope.response = response.data;
+                        console.log(response);
                         //$scope.mylog("Data Download");
                         //$scope.downloading ="Data Download";
                         $scope.ImportDataInTables();
