@@ -16,6 +16,13 @@ Create_Tables_Query[5] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_posts" ("post_id" 
 Create_Tables_Query[6] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_posts_des" ("post_des_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "post_id" INTEGER, "lang_id" INTEGER, "post_title" TEXT, "post_desc" TEXT);';
 
 var ang_app = angular.module("rgyan", []);
+
+ang_app.filter("trustUrl", ['$sce', function ($sce) {
+        return function (recordingUrl) {
+            return $sce.trustAsResourceUrl(recordingUrl);
+        };
+    }]);
+
 ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $interval) {
     $scope.response = null;
     $scope.nrgyn_basic_settings = '';
@@ -103,8 +110,24 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
         if (typeof song !== "undefined" && song !== 0 && song !== null)
         {
             $scope.soundStatus = "fa-volume-up";
-            $scope.PlaySong = $scope.ImageDir + song;
-            $scope.SongName = "Palying...";
+
+            if (!$scope.fileExists($scope.ImageDir + song))
+            {
+
+                $scope.PlaySong = "http://rgyan.nexibms.in/upload/mp3/" + song;
+                $scope.SongName = "Palying from server";
+                //
+                //$scope.$applyAsync();
+                //alert($scope.PlaySong);
+
+            }
+            else
+            {
+                $scope.PlaySong = $scope.ImageDir + song;
+
+                $scope.SongName = "Palying...";
+            }
+
             $scope.AudioPlayer.muted = false;
 
         }
@@ -231,7 +254,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
             if (i == Create_Tables_Query.length)
             {
                 $scope.checkbeforeSettingDatabase();
-               // $scope.DownloadDataBase();
+                // $scope.DownloadDataBase();
             }
 
 
@@ -244,7 +267,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
         }
 
     };
-     $scope.ImportDataInTables = function () {
+    $scope.ImportDataInTables = function () {
         if ($scope.response != null)
         {
 
@@ -364,9 +387,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 //                    $scope.mylog(category[i]);
 //                    $scope.mylog(coloumn);
 //                    $scope.mylog(values);
-                       //
+                        //
                     }
-                     $scope.TrackPreloader('hide');
+                    $scope.TrackPreloader('hide');
                     $scope.appInit();
                     $scope.checkbeforeDownload();
 
@@ -540,11 +563,11 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
         $scope.$applyAsync();
         $scope.appInit();
     };
-    
-    
-    $scope.checkbeforeSettingDatabase = function()
+
+
+    $scope.checkbeforeSettingDatabase = function ()
     {
-         if (db)
+        if (db)
         {
             db.transaction(function (transaction) {
 
@@ -572,7 +595,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
     $scope.DownloadDataBase = function () {
         //Download database from server and store in $scope.response
-      //  document.addEventListener("offline", $scope.appInit(), false);
+        //  document.addEventListener("offline", $scope.appInit(), false);
 
 //        comment
         try
@@ -641,7 +664,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
         $scope.getMainCategory();
         $scope.DailySongs();
         //
-       $scope.$applyAsync();
+        $scope.$applyAsync();
 
         // $scope.preloader = "hidden";
         // $scope.preloader = "hidden";
