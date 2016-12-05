@@ -230,7 +230,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
             if (i == Create_Tables_Query.length)
             {
-                $scope.DownloadDataBase();
+                $scope.checkbeforeSettingDatabase();
+               // $scope.DownloadDataBase();
             }
 
 
@@ -539,11 +540,39 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
         $scope.$applyAsync();
         $scope.appInit();
     };
+    
+    
+    $scope.checkbeforeSettingDatabase = function()
+    {
+         if (db)
+        {
+            db.transaction(function (transaction) {
+
+                var sql = "SELECT * from nrgyn_main_cat";
+                transaction.executeSql(sql, []
+                        , function (tx, results) {
+                            //$scope.mylog("day row" + results.rows);
+                            if (results.rows.length == 0)
+                            {
+                                $scope.DownloadDataBase();
+                            }
+                            // //$scope.mylog(results.rows);
+
+                            //start download
+
+                            //end download 
+
+                        }
+                , function (error) {
+                    //$scope.mylog(error);
+                });
+            });
+        }
+    }
 
     $scope.DownloadDataBase = function () {
-
         //Download database from server and store in $scope.response
-        document.addEventListener("offline", $scope.appInit(), false);
+      //  document.addEventListener("offline", $scope.appInit(), false);
 
 //        comment
         try
@@ -569,7 +598,6 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
         } catch (err)
         {
             //$scope.mylog("Error in try catch database" + err.message);
-
             $scope.appInit();
         }
 
