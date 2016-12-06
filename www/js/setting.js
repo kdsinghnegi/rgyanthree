@@ -579,6 +579,10 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             {
                                 $scope.DownloadDataBase();
                             }
+                            else
+                            {
+                                $scope.appInit();
+                            }
                             // //$scope.mylog(results.rows);
 
                             //start download
