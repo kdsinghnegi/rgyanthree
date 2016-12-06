@@ -114,8 +114,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
             if (!$scope.fileExists($scope.ImageDir + song))
             {
                document.addEventListener("offline", function (){
-                 
-                    alert("Ther is not internet connection.");
+                  
+                    alert("There is not internet connection.");
                    
                }, false);
 
