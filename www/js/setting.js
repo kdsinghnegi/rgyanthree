@@ -117,7 +117,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                     alert("There is not internet connection.");
                     return 0;
                 }
-                
+
 
                 $scope.PlaySong = "http://rgyan.nexibms.in/upload/mp3/" + song;
                 $scope.SongName = "Palying from server";
@@ -587,6 +587,12 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             else
                             {
                                 $scope.appInit();
+
+                                if (navigator.network.connection.type != Connection.NONE) {
+                                    $scope.checkbeforeDownload();
+                                }
+
+
                             }
                             // //$scope.mylog(results.rows);
 
