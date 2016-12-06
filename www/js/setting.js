@@ -113,11 +113,11 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
             if (!$scope.fileExists($scope.ImageDir + song))
             {
-               document.addEventListener("offline", function (){
-                  
+                if (navigator.network.connection.type == Connection.NONE) {
                     alert("There is not internet connection.");
-                   
-               }, false);
+                    return 0;
+                }
+                
 
                 $scope.PlaySong = "http://rgyan.nexibms.in/upload/mp3/" + song;
                 $scope.SongName = "Palying from server";
