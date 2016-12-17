@@ -140,7 +140,7 @@
                     <div class="mantra" ng-repeat="posts in Post">
                         <!--                        {{ImageDir+'/'+posts.offline_thumb_img}}-->
                         <div  ng-click="show_post_desc(posts.post_des_id)">
-                            <div class="subcatBg"  style="height: 100px ; width: 100px ; margin-left: 5px; float: left ;background-size: cover; background-image: url({{urlEncode(posts.offline_thumb_img)}})" >
+                            <div class="subcatBg"  style="height: 100px ; width: 105px ;margin-right: 5px;background-size: cover; background-image: url({{urlEncode(posts.offline_thumb_img)}})" >
 
                             </div>
 
@@ -169,7 +169,7 @@
                         <h1 class="MantraTitle MantraTitleCustom">
                             {{post.post_title}}
                         </h1>
-                        <p ng-bind-html="reder_html(post.post_desc)">
+                        <p style="font-size: 15px" ng-bind-html="reder_html(post.post_desc)">
                             <!--                            {{post.post_desc}}-->
 
                         </p>

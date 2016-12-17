@@ -564,7 +564,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
         var file_url = $scope.ImageDir + image;
         if ($scope.fileExists(file_url))
         {
-            return $scope.ImageDir + image;
+            return file_url;
         }
         return 'img/noimage.gif';
 
@@ -1217,7 +1217,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
     $scope.reder_html = function (html) {
 
-
+        html=html.replace(/<(?:.|\n)*?>/gm, '');
+        
         return $sce.trustAsHtml(html);
 
     };
