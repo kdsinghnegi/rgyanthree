@@ -588,7 +588,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                         , function (tx, results) {
                             //$scope.mylog("day row" + results.rows);
                             if (results.rows.length == 0)
-                            {
+                            { // start downlloadinf database;
                                 $scope.DownloadDataBase();
                             }
                             else
@@ -615,7 +615,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
         }
     }
 
-    $scope.DownloadDataBase = function () {
+    $scope.DownloadDataBase=  function () {
         //Download database from server and store in $scope.response
         //  document.addEventListener("offline", $scope.appInit(), false);
 
