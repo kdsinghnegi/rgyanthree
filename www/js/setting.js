@@ -1,10 +1,10 @@
 /*global $ */
 
 var db;
-var shortName = "mumbaia";
+var shortName = "aws_serverhai";
 var version = "1.6";
-var displayName = "mumbaia";
-var maxSize = 5000 * 2024;
+var displayName = "aws_serverhai";
+var maxSize = 8000 * 2024;
 
 var Create_Tables_Query = new Array();
 Create_Tables_Query[0] = 'CREATE  TABLE  IF NOT EXISTS "nrgyn_basic_settings" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "app_title" TEXT, "status" BOOL, "Add_User" INTEGER, "Mode_User" INTEGER, "curr_lang_id" INTEGER, "Add_DateTime" DATETIME, "Mode_DateTime" DATETIME);';
