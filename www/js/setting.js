@@ -561,7 +561,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
     $scope.urlEncode = function (image) {
 
-       
+        return $scope.ImageDir + image;
         if ($scope.fileExists($scope.ImageDir + image))
         {
             return $scope.ImageDir + image;
