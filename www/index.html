@@ -117,7 +117,7 @@
 
                     <!--                    sub category-->
                     <div class="godDiv col-xs-6 col-lg-4 col-sm-4 col-md-4 " ng-repeat="sub_cat in MainSubCategory">
-                        <div ng-click="show_post(sub_cat.cat_id)">
+                        <div class="col-sm-12 col-md-12" ng-click="show_post(sub_cat.cat_id)">
                             <!--                            {{ImageDir+'/'+sub_cat.offline_bg_img}}-->
                             <div class="subcatBg"  style="height: 100px ; width: 100% ; background-size: cover; background-image: url({{urlEncode(sub_cat.offline_bg_img)}})" >
                             </div>
