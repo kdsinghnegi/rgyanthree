@@ -561,12 +561,16 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
     $scope.urlEncode = function (image) {
 
-        var file_url = $scope.ImageDir + image;
-        if ($scope.fileExists(file_url))
+       
+        if ($scope.fileExists($scope.ImageDir + image))
         {
-            return file_url;
+            return $scope.ImageDir + image;
         }
-        return 'img/noimage.gif';
+        else
+        {
+            return 'img/noimage.gif';
+        }
+        
 
     };
     $scope.ChangeLanguage = function (id)
@@ -613,7 +617,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                 });
             });
         }
-    }
+    };
 
     $scope.DownloadDataBase=  function () {
         //Download database from server and store in $scope.response
