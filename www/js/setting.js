@@ -75,7 +75,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
     $scope.image_exist = function (Image)
     {
-        if (Image !=='')
+        if (Image !== '')
         {
             var file_url = 'img/' + Image;
 
@@ -396,7 +396,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                     }
                     $scope.TrackPreloader('hide');
                     $scope.appInit();
-                   
+
 
                     //$scope.TrackPreloader('hide');
 
@@ -527,8 +527,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
     $scope.checkbeforeDownload = function ()
     {
-                     $scope.assetsDownload();
-                           
+        $scope.assetsDownload();
+
     };
 
     $scope.urlEncode = function (image) {
@@ -543,7 +543,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
         {
             return 'img/noimage.gif';
         }
-        
+
 
     };
     $scope.ChangeLanguage = function (id)
@@ -592,7 +592,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
         }
     };
 
-    $scope.DownloadDataBase=  function () {
+    $scope.DownloadDataBase = function () {
         //Download database from server and store in $scope.response
         //  document.addEventListener("offline", $scope.appInit(), false);
 
@@ -663,7 +663,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
         $scope.getMainCategory();
         $scope.DailySongs();
         //
-         $scope.checkbeforeDownload();
+        $scope.checkbeforeDownload();
         $scope.$applyAsync();
 
         // $scope.preloader = "hidden";
@@ -1087,7 +1087,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                     //$("#rowCount").append(len);
 
                     //cordova.file.createDir($scope.ImageDir,"img");
-                    
+
                     for (i = 0; i < len; i++) {
 
                         var image = results.rows.item(i).offline_bg_img;
@@ -1185,9 +1185,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
     $scope.fileExists = function (url) {
         if (url) {
             var req = new XMLHttpRequest();
-            req.open('HEAD', url, false);
-            req.send();
-            return req.status != 404;
+            req.open('GET', url, false);
+            req.send(null);
+            return req.status === 200;
         } else {
             return false;
         }
@@ -1195,8 +1195,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
     $scope.reder_html = function (html) {
 
-        html=html.replace(/<(?:.|\n)*?>/gm, '');
-        
+        html = html.replace(/<(?:.|\n)*?>/gm, '');
+
         return $sce.trustAsHtml(html);
 
     };
