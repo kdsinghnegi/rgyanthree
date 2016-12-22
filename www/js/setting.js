@@ -562,9 +562,10 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
     $scope.urlEncode = function (image) {
 
         //return $scope.ImageDir + image;
-        if ($scope.fileExists($scope.ImageDir + image))
+        var file = $scope.ImageDir + image;
+        if ($scope.fileExists(file))
         {
-            return $scope.ImageDir + image;
+            return file;
         }
         else
         {
@@ -1211,9 +1212,9 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
     $scope.fileExists = function (url) {
         if (url) {
             var req = new XMLHttpRequest();
-            req.open('GET', url, false);
-            req.send(null);
-            return req.status === 200;
+            req.open('HEAD', url, false);
+            req.send();
+            return req.status != 404;
         } else {
             return false;
         }
