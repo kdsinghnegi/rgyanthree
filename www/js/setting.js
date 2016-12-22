@@ -75,7 +75,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
     $scope.image_exist = function (Image)
     {
-        if (Image !== '')
+        if (Image)
         {
             var file_url = 'img/' + Image;
 
