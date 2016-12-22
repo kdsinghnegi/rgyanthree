@@ -561,7 +561,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
     $scope.urlEncode = function (image) {
 
-        return $scope.ImageDir + image;
+        //return $scope.ImageDir + image;
         if ($scope.fileExists($scope.ImageDir + image))
         {
             return $scope.ImageDir + image;
@@ -1212,8 +1212,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
         if (url) {
             var req = new XMLHttpRequest();
             req.open('GET', url, false);
-            req.send();
-            return req.status == 200;
+            req.send(null);
+            return req.status === 200;
         } else {
             return false;
         }
