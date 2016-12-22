@@ -396,7 +396,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                     }
                     $scope.TrackPreloader('hide');
                     $scope.appInit();
-                    $scope.checkbeforeDownload();
+                   
 
                     //$scope.TrackPreloader('hide');
 
@@ -527,36 +527,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
     $scope.checkbeforeDownload = function ()
     {
-
-        document.addEventListener("offline", function () {
-            //$scope.mylog("Sorry Internet to avaliable..");
-        }, false);
-//donwload files
-        if (db)
-        {
-            db.transaction(function (transaction) {
-
-                var sql = "SELECT * from nrgyn_basic_settings";
-                transaction.executeSql(sql, []
-                        , function (tx, results) {
-                            //$scope.mylog("day row" + results.rows);
-                            if (results.rows.length > 0)
-                            {
-                                $scope.assetsDownload();
-                            }
-                            // //$scope.mylog(results.rows);
-
-                            //start download
-
-                            //end download 
-
-                        }
-                , function (error) {
-                    //$scope.mylog(error);
-                });
-            });
-        }
-
+                     $scope.assetsDownload();
+                           
     };
 
     $scope.urlEncode = function (image) {
@@ -691,6 +663,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
         $scope.getMainCategory();
         $scope.DailySongs();
         //
+         $scope.checkbeforeDownload();
         $scope.$applyAsync();
 
         // $scope.preloader = "hidden";
@@ -1114,7 +1087,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                     //$("#rowCount").append(len);
 
                     //cordova.file.createDir($scope.ImageDir,"img");
-
+                    
                     for (i = 0; i < len; i++) {
 
                         var image = results.rows.item(i).offline_bg_img;
