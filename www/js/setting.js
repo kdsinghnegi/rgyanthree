@@ -527,7 +527,11 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
     $scope.checkbeforeDownload = function ()
     {
-        $scope.assetsDownload();
+         if (navigator.network.connection.type != Connection.NONE)
+         {
+              $scope.assetsDownload();
+         }
+       
 
     };
 
@@ -572,9 +576,6 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                             {
                                 $scope.appInit();
 
-                                if (navigator.network.connection.type != Connection.NONE) {
-                                    $scope.checkbeforeDownload();
-                                }
 
 
                             }
