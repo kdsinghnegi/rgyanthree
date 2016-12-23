@@ -77,7 +77,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
     {
         if (Image !== '')
         {
-            var file_url = 'img/' + Image;
+            var file_url = '/img/' + Image;
 
             if (!$scope.fileExists(file_url))
             {
@@ -396,7 +396,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                     }
                     $scope.TrackPreloader('hide');
                     $scope.appInit();
-
+                    $scope.checkbeforeDownload();
 
                     //$scope.TrackPreloader('hide');
 
@@ -527,11 +527,11 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
     $scope.checkbeforeDownload = function ()
     {
-         if (navigator.network.connection.type != Connection.NONE)
-         {
-              $scope.assetsDownload();
-         }
-       
+        if (navigator.network.connection.type != Connection.NONE)
+        {
+            $scope.assetsDownload();
+        }
+
 
     };
 
@@ -664,7 +664,7 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
         $scope.getMainCategory();
         $scope.DailySongs();
         //
-        $scope.checkbeforeDownload();
+
         $scope.$applyAsync();
 
         // $scope.preloader = "hidden";
@@ -1184,11 +1184,20 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
 
     $scope.fileExists = function (url) {
+
+        
+
         if (url) {
-            var req = new XMLHttpRequest();
-            req.open('GET', url, false);
-            req.send(null);
-            return req.status === 200;
+            var http = new XMLHttpRequest();
+            http.open('GET', url, false);
+            http.send(null);
+            if(http.status == '200')
+            {
+                $scope.mylog(url + " status:");
+                $scope.mylog(http.status + " ,Next ");
+            }
+            
+            return http.status === 200;
         } else {
             return false;
         }

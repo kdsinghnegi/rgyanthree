@@ -95,10 +95,9 @@
                 <div class="preloader {{preloader}}">
                     <i style=" margin: 45% auto;" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>  
-                <!--                <div ng-bind-html="reder_html(downloading)">
-                                    
-                                </div>-->
-                <!--                                {{downloading}}-->
+                           <div ng-bind-html="reder_html(downloading)">
+                                   
+                                </div>
 
                 <div class=" {{MainCatStatus}}">
 
@@ -114,7 +113,6 @@
                 </div>
 
                 <div class="main_god_container col-lg-12 col-sm-12 col-md-12 {{MainSubCatStatus}}  ">
-
                     <!--                    sub category-->
                     <div class="godDiv col-xs-6 col-lg-4 col-sm-4 col-md-4 " ng-repeat="sub_cat in MainSubCategory">
                         <div class="col-sm-12 col-md-12" ng-click="show_post(sub_cat.cat_id)">
@@ -125,14 +123,8 @@
                             <h1 class="godTitle">{{sub_cat.name}}</h1>
                         </div>
                     </div>
-
-
                 </div>
-
-
-
                 <div class="MantraContainer {{PostStatus}} ">
-
                     <!--                    <div ng-repeat="x in mantra">
                                             {{x["mantra"]}}
                                         </div>-->
