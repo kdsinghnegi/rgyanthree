@@ -1185,20 +1185,31 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
 
     $scope.fileExists = function (url) {
 
-        
 
-        if (url) {
-            var http = new XMLHttpRequest();
-            http.open('GET', url, false);
-            http.send(null);
-            if(http.status == 200)
-            {
-                $scope.mylog(url + " status:");
-                $scope.mylog(http.status + " ,Next ");
-            }
-            
-            
-            return http.status === 200;
+
+        if (url !== '') {
+
+            var response = $.ajax({
+                url: url,
+                type: 'HEAD',
+                async: false
+            }).status;
+
+            return (response != "200") ? false : true;
+
+
+//
+//            var http = new XMLHttpRequest();
+//            http.open('GET', url, false);
+//            http.send(null);
+//            if (http.status == 200)
+//            {
+//                $scope.mylog(url + " status:");
+//                $scope.mylog(http.status + " ,Next ");
+//            }
+//
+//
+//            return http.status === 200;
         } else {
             return false;
         }
