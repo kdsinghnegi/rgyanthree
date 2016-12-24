@@ -1194,7 +1194,8 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
                 type: 'HEAD',
                 async: false
             }).status;
-
+                $scope.mylog(url + " status:");
+                $scope.mylog(response+ " ,Next ");
             return (response != "200") ? false : true;
 
 
