@@ -1191,11 +1191,12 @@ ang_app.controller("rgyanCotrl", function ($scope, $http, $sce, $timeout, $inter
             var http = new XMLHttpRequest();
             http.open('GET', url, false);
             http.send(null);
-            if(http.status == '200')
+            if(http.status == 200)
             {
                 $scope.mylog(url + " status:");
                 $scope.mylog(http.status + " ,Next ");
             }
+            
             
             return http.status === 200;
         } else {
